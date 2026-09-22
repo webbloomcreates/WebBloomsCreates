@@ -61,7 +61,7 @@ export default function Hero({ onOpenProjectModal }) {
             <div className="animate-hero-1" style={{ marginBottom: '1.25rem' }}>
               <span className="badge-tag">
                 <Sparkles size={14} style={{ color: 'var(--sage)' }} />
-                WEBBLOOMBUILDS • BESPOKE WEB DESIGN
+                WEBBLOOM.CREATES • BESPOKE WEB DESIGN
               </span>
             </div>
 

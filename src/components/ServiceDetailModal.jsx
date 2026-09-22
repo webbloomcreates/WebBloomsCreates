@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { X, Check, Layers, ShieldCheck, ArrowRight, Sparkles, Monitor, Database } from 'lucide-react';
+import { X, Check, Layers, ShieldCheck, ArrowRight, Sparkles, Monitor, Database, Smartphone, Layout, HelpCircle } from 'lucide-react';
 
 export default function ServiceDetailModal({ service, onClose, onSelectService }) {
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function ServiceDetailModal({ service, onClose, onSelectService }
       <div
         style={{
           width: '100%',
-          maxWidth: '740px',
+          maxWidth: '760px',
           maxHeight: '90vh',
           backgroundColor: 'var(--bg-primary)',
           borderRadius: 'var(--radius-lg)',
@@ -77,11 +77,12 @@ export default function ServiceDetailModal({ service, onClose, onSelectService }
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.4rem', flexWrap: 'wrap' }}>
               <span
                 style={{
-                  fontFamily: 'var(--font-serif)',
-                  fontSize: '1.1rem',
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.78rem',
                   fontWeight: '700',
                   color: 'var(--sage)',
-                  letterSpacing: '0.05em'
+                  letterSpacing: '0.12em',
+                  textTransform: 'uppercase'
                 }}
               >
                 SERVICE {service.number}
@@ -173,10 +174,15 @@ export default function ServiceDetailModal({ service, onClose, onSelectService }
             gap: '1.5rem'
           }}
         >
-          {/* Description */}
-          <p style={{ fontSize: '1.02rem', color: 'var(--charcoal-light)', lineHeight: '1.6' }}>
-            {service.shortDescription}
-          </p>
+          {/* Overview Block */}
+          <div>
+            <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--forest)', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '0.4rem' }}>
+              SERVICE OVERVIEW
+            </span>
+            <p style={{ fontSize: '1.02rem', color: 'var(--charcoal-light)', lineHeight: '1.6' }}>
+              {service.shortDescription}
+            </p>
+          </div>
 
           {/* Suitable For / Examples if present */}
           {service.suitableForExamples && (
@@ -199,7 +205,7 @@ export default function ServiceDetailModal({ service, onClose, onSelectService }
                   marginBottom: '0.6rem'
                 }}
               >
-                SUITABLE FOR & EXAMPLES:
+                SUITABLE FOR & USE CASES:
               </span>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
                 {service.suitableForExamples.map((ex, idx) => (
@@ -330,7 +336,7 @@ export default function ServiceDetailModal({ service, onClose, onSelectService }
                       display: 'flex',
                       alignItems: 'center',
                       gap: '0.6rem',
-                      padding: '0.65rem 0.85rem',
+                      padding: '0.7rem 0.9rem',
                       borderRadius: 'var(--radius-sm)',
                       backgroundColor: 'var(--bg-secondary)',
                       border: '1px solid var(--border-subtle)',
@@ -345,6 +351,26 @@ export default function ServiceDetailModal({ service, onClose, onSelectService }
               </div>
             </div>
           )}
+
+          {/* Standard Deliverables Footer Pill */}
+          <div
+            style={{
+              padding: '0.85rem 1.1rem',
+              borderRadius: 'var(--radius-sm)',
+              backgroundColor: 'var(--sage-tint)',
+              border: '1px solid rgba(163, 194, 158, 0.4)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.6rem',
+              fontSize: '0.86rem',
+              color: 'var(--forest)'
+            }}
+          >
+            <Smartphone size={16} style={{ flexShrink: 0 }} />
+            <span>
+              <strong>100% Mobile Optimized:</strong> Every build includes full smartphone responsiveness, fast loading speeds, and direct WhatsApp / form integration.
+            </span>
+          </div>
         </div>
 
         {/* Footer Actions */}
@@ -371,9 +397,10 @@ export default function ServiceDetailModal({ service, onClose, onSelectService }
           <button
             onClick={handleCta}
             className="btn-primary"
-            style={{ padding: '0.85rem 1.8rem', fontSize: '0.95rem' }}
+            style={{ padding: '0.85rem 1.8rem', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
           >
-            {service.ctaText} →
+            <span>Start Your Project</span>
+            <ArrowRight size={15} />
           </button>
         </div>
       </div>

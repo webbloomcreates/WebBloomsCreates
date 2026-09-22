@@ -16,7 +16,6 @@ export default function Navbar({ onOpenProjectModal }) {
   const navLinks = [
     { label: 'Home', href: '#' },
     { label: 'Our Work', href: '#work' },
-    { label: 'Pricing', href: '#pricing' },
     { label: 'Services', href: '#services' },
     { label: 'Process', href: '#process' },
     { label: 'FAQ', href: '#faq' }
@@ -78,7 +77,7 @@ export default function Navbar({ onOpenProjectModal }) {
                   transition: 'font-size 0.3s ease'
                 }}
               >
-                WebBloomBuilds
+                Webbloom.creates
               </span>
             </div>
           </a>

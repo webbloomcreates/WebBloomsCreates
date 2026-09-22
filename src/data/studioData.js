@@ -1,5 +1,5 @@
 export const studioInfo = {
-  name: "WebBloomBuilds",
+  name: "Webbloom.creates",
   tagline: "Websites • Design • Growth",
   shortDescription: "We design and build modern websites for businesses, brands and individuals.",
   handle: "@web.bloomcreates",

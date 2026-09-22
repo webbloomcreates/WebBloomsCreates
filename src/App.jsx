@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Portfolio from './components/Portfolio';
-import Pricing from './components/Pricing';
 import Services from './components/Services';
 import Process from './components/Process';
 import FAQ from './components/FAQ';
@@ -33,11 +32,10 @@ export default function App() {
       {/* Main Homepage Flow:
           1. Hero
           2. Our Work (Portfolio)
-          3. Pricing (Packages & Costs)
-          4. Services (Capabilities Explorer)
-          5. Process (How We Work)
-          6. FAQ
-          7. Start a Project (Permanent Inquiry Form Section)
+          3. Services (Main Capabilities & Services Showcase)
+          4. Process (How We Work)
+          5. FAQ
+          6. Start a Project (Permanent Inquiry Form Section)
       */}
       <main style={{ flexGrow: 1 }}>
         {/* 1. Hero */}
@@ -50,33 +48,27 @@ export default function App() {
           onOpenProjectModal={handleNavigateToProject}
         />
 
-        {/* 3. Pricing */}
-        <Pricing
-          onOpenProjectModal={handleNavigateToProject}
-          onSelectPackage={handleNavigateToProject}
-        />
-
-        {/* 4. Services Explorer */}
+        {/* 3. Services Explorer */}
         <Services
           onOpenProjectModal={handleNavigateToProject}
           onSelectPackage={handleNavigateToProject}
         />
 
-        {/* 5. Process */}
+        {/* 4. Process */}
         <Process />
 
-        {/* 6. FAQ */}
+        {/* 5. FAQ */}
         <FAQ
           onOpenProjectModal={handleNavigateToProject}
         />
 
-        {/* 7. Start a Project / Permanent Inquiry Form */}
+        {/* 6. Start a Project / Permanent Inquiry Form */}
         <ProjectRequestSection
           preselectedPackage={selectedPackage}
         />
       </main>
 
-      {/* 8. Footer */}
+      {/* 7. Footer */}
       <Footer
         onOpenProjectModal={handleNavigateToProject}
       />

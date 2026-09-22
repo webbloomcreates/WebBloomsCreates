@@ -104,7 +104,6 @@ export default function Footer({ onOpenProjectModal }) {
               {[
                 { label: 'Home', href: '#' },
                 { label: 'Our Work', href: '#work' },
-                { label: 'Pricing', href: '#pricing' },
                 { label: 'Services', href: '#services' },
                 { label: 'Process', href: '#process' },
                 { label: 'FAQ', href: '#faq' }
@@ -247,11 +246,11 @@ export default function Footer({ onOpenProjectModal }) {
           }}
         >
           <div>
-            © 2026 WebBloomBuilds. All rights reserved.
+            © 2026 Webbloom.creates. All rights reserved.
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--sage-muted)', fontWeight: '500' }}>
-            Built with care by WebBloomBuilds.
+            Built with care by Webbloom.creates.
           </div>
         </div>
       </div>
