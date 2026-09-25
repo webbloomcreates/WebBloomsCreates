@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Check, Send, Instagram, Mail, CheckCircle2, Loader2, Sparkles, MessageCircle, ArrowRight } from 'lucide-react';
+import { Check, Send, Instagram, Mail, CheckCircle2, Loader2, Sparkles, MessageCircle, ArrowRight, Copy, CheckCheck, ExternalLink } from 'lucide-react';
 import { submitProjectRequest } from '../services/projectService';
 import { studioInfo } from '../data/studioData';
 import ScrollReveal from './ScrollReveal';
@@ -24,6 +23,8 @@ export default function ProjectRequestSection({ preselectedPackage }) {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [generatedMessage, setGeneratedMessage] = useState('');
+  const [isCopied, setIsCopied] = useState(false);
 
   const serviceOptions = [
     'Basic Website',
@@ -131,6 +132,74 @@ export default function ProjectRequestSection({ preselectedPackage }) {
     }
   };
 
+  const buildInquiryMessage = (data) => {
+    const parts = ["Hi WebBloomCreates! 👋\n\nI'd like to discuss a website project."];
+
+    const projectTypeVal = data.service || data.projectType || data.selectedPackage;
+    if (projectTypeVal && projectTypeVal.trim()) {
+      parts.push(`Project Type:\n${projectTypeVal.trim()}`);
+    }
+
+    if (data.projectDescription && data.projectDescription.trim()) {
+      parts.push(`Project Details:\n${data.projectDescription.trim()}`);
+    }
+
+    if (Array.isArray(data.requestedFeatures) && data.requestedFeatures.length > 0) {
+      parts.push(`Requirements:\n${data.requestedFeatures.join(', ')}`);
+    }
+
+    if (data.clientName && data.clientName.trim()) {
+      parts.push(`Name: ${data.clientName.trim()}`);
+    }
+
+    if (data.businessName && data.businessName.trim()) {
+      parts.push(`Business Name: ${data.businessName.trim()}`);
+    }
+
+    if (data.preferredContactMethod && data.contactValue && data.contactValue.trim()) {
+      parts.push(`Preferred Contact: ${data.preferredContactMethod} (${data.contactValue.trim()})`);
+    }
+
+    if (data.budget && data.budget.trim()) {
+      parts.push(`Budget: ${data.budget.trim()}`);
+    }
+
+    if (data.additionalNotes && data.additionalNotes.trim()) {
+      parts.push(`Additional Information:\n${data.additionalNotes.trim()}`);
+    }
+
+    parts.push("Looking forward to discussing the project with you!");
+
+    return parts.join("\n\n");
+  };
+
+  const copyToClipboard = async (text) => {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (err) {
+        console.warn('Clipboard writeText failed:', err);
+      }
+    }
+    try {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-9999px';
+      textArea.style.top = '-9999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      const successful = document.execCommand('copy');
+      document.body.removeChild(textArea);
+      return successful;
+    } catch (err) {
+      console.warn('execCommand copy failed:', err);
+      return false;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -165,14 +234,26 @@ export default function ProjectRequestSection({ preselectedPackage }) {
     setIsSubmitting(true);
     setErrors({});
 
+    // 1. Generate inquiry message
+    const messageText = buildInquiryMessage(formData);
+    setGeneratedMessage(messageText);
+
+    // 2. Copy to clipboard
+    const copied = await copyToClipboard(messageText);
+    setIsCopied(copied);
+
+    // 3. Save locally as backup
     try {
       await submitProjectRequest(formData);
-      setIsSubmitting(false);
-      setIsSubmitted(true);
     } catch (err) {
-      setIsSubmitting(false);
-      setErrors({ submit: err.message || 'Failed to send inquiry. Please try again.' });
+      console.warn('Local persist note:', err);
     }
+
+    setIsSubmitting(false);
+    setIsSubmitted(true);
+
+    // 4. Open Instagram destination in new tab/window
+    window.open(studioInfo.instagramUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -379,104 +460,128 @@ export default function ProjectRequestSection({ preselectedPackage }) {
               }}
             >
               {isSubmitted ? (
-                /* CONFIRMATION SUCCESS MESSAGE */
-                <div style={{ textAlign: 'center', padding: '2.5rem 1rem' }}>
+                /* INSTAGRAM DIRECTED CONFIRMATION SCREEN */
+                <div style={{ textAlign: 'center', padding: '1.25rem 0.25rem' }}>
                   <div
                     style={{
-                      width: '72px',
-                      height: '72px',
+                      width: '68px',
+                      height: '68px',
                       borderRadius: '50%',
                       backgroundColor: 'var(--sage-tint)',
                       color: 'var(--forest)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      margin: '0 auto 1.5rem auto',
+                      margin: '0 auto 1.25rem auto',
                       border: '1px solid rgba(163, 194, 158, 0.5)'
                     }}
                   >
-                    <CheckCircle2 size={40} />
+                    <Instagram size={36} />
                   </div>
 
                   <h3
                     style={{
                       fontFamily: 'var(--font-serif)',
-                      fontSize: 'clamp(2.2rem, 3.8vw, 2.8rem)',
+                      fontSize: 'clamp(1.9rem, 3.5vw, 2.5rem)',
                       color: 'var(--forest)',
-                      marginBottom: '0.75rem',
+                      marginBottom: '0.65rem',
                       lineHeight: '1.2'
                     }}
                   >
-                    Thanks for reaching out!
+                    Inquiry Copied & Instagram Opening! 🎉
                   </h3>
 
                   <p
                     style={{
-                      fontSize: '1.05rem',
+                      fontSize: '0.98rem',
                       color: 'var(--charcoal-light)',
-                      lineHeight: '1.65',
+                      lineHeight: '1.6',
                       maxWidth: '520px',
-                      margin: '0 auto 2rem auto'
+                      margin: '0 auto 1.5rem auto'
                     }}
                   >
-                    Your project inquiry has been received. We'll review your idea and get back to you through your preferred contact method.
+                    {isCopied
+                      ? 'Your inquiry has been copied. Paste it into our Instagram DM (@web.bloomcreates) and send it!'
+                      : 'Opening Instagram DM. You can copy your message below and paste it into our DM.'}
                   </p>
 
+                  {/* Formatted Message Box */}
                   <div
                     style={{
                       backgroundColor: 'var(--bg-primary)',
-                      padding: '1.5rem',
+                      padding: '1.25rem',
                       borderRadius: 'var(--radius-md)',
-                      border: '1px solid var(--border-subtle)',
-                      marginBottom: '2rem',
+                      border: '1px solid var(--border-medium)',
+                      marginBottom: '1.75rem',
                       textAlign: 'left'
                     }}
                   >
-                    <span style={{ fontSize: '0.8rem', fontWeight: '700', color: 'var(--forest)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block', marginBottom: '0.75rem' }}>
-                      DIRECT CONTACT CHANNELS:
-                    </span>
-
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                      <a
-                        href={studioInfo.instagramUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ color: 'var(--forest)', fontWeight: '600', fontSize: '0.92rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
-                      >
-                        <Instagram size={16} /> Instagram: {studioInfo.handle}
-                      </a>
-                      <a
-                        href={`mailto:${studioInfo.email}`}
-                        style={{ color: 'var(--forest)', fontWeight: '600', fontSize: '0.92rem', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
-                      >
-                        <Mail size={16} /> Email: {studioInfo.email}
-                      </a>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
+                      <span style={{ fontSize: '0.78rem', fontWeight: '700', color: 'var(--sage)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                        GENERATED INQUIRY MESSAGE:
+                      </span>
+                      <span style={{ fontSize: '0.75rem', fontWeight: '600', color: isCopied ? 'var(--forest)' : 'var(--charcoal-muted)', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                        {isCopied ? <CheckCheck size={14} /> : <Copy size={14} />}
+                        {isCopied ? 'Copied to Clipboard' : 'Ready to Copy'}
+                      </span>
                     </div>
+
+                    <pre
+                      style={{
+                        fontFamily: 'var(--font-sans)',
+                        fontSize: '0.88rem',
+                        lineHeight: '1.55',
+                        color: 'var(--charcoal)',
+                        whiteSpace: 'pre-wrap',
+                        wordBreak: 'break-word',
+                        backgroundColor: 'var(--bg-secondary)',
+                        padding: '1rem',
+                        borderRadius: 'var(--radius-sm)',
+                        border: '1px solid var(--border-subtle)',
+                        maxHeight: '220px',
+                        overflowY: 'auto'
+                      }}
+                    >
+                      {generatedMessage}
+                    </pre>
                   </div>
 
-                  <button
-                    onClick={() => {
-                      setIsSubmitted(false);
-                      setFormData({
-                        clientName: '',
-                        businessName: '',
-                        projectType: 'New Website',
-                        selectedPackage: '',
-                        requestedFeatures: [],
-                        projectDescription: '',
-                        hasExistingWebsite: 'No',
-                        existingWebsiteUrl: '',
-                        preferredContactMethod: 'Instagram',
-                        contactValue: '',
-                        budget: '',
-                        additionalNotes: ''
-                      });
-                    }}
-                    className="btn-primary"
-                    style={{ padding: '0.95rem 2.2rem' }}
-                  >
-                    Submit Another Inquiry →
-                  </button>
+                  {/* Action Controls */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                    <a
+                      href={studioInfo.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary"
+                      style={{ width: '100%', padding: '0.95rem', justifyContent: 'center', fontSize: '0.98rem' }}
+                    >
+                      <Instagram size={18} />
+                      Open Instagram DM (@web.bloomcreates) →
+                    </a>
+
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          const ok = await copyToClipboard(generatedMessage);
+                          setIsCopied(ok);
+                        }}
+                        className="btn-secondary"
+                        style={{ flex: '1 1 140px', padding: '0.8rem', fontSize: '0.88rem', justifyContent: 'center' }}
+                      >
+                        {isCopied ? '✓ Message Copied' : 'Copy Message Again'}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setIsSubmitted(false)}
+                        className="btn-secondary"
+                        style={{ flex: '1 1 140px', padding: '0.8rem', fontSize: '0.88rem', justifyContent: 'center' }}
+                      >
+                        Edit Inquiry Details
+                      </button>
+                    </div>
+                  </div>
                 </div>
               ) : (
                 /* MAIN INQUIRY FORM */
