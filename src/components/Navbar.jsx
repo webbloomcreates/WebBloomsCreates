@@ -13,13 +13,49 @@ export default function Navbar({ onOpenProjectModal }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
-    { label: 'Home', href: '#' },
+    { label: 'Home', href: '#home' },
     { label: 'Our Work', href: '#work' },
     { label: 'Services', href: '#services' },
     { label: 'Process', href: '#process' },
     { label: 'FAQ', href: '#faq' }
   ];
+
+  const handleNavClick = (href) => {
+    setMobileMenuOpen(false);
+    if (href === '#home' || href === '#') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    const id = href.replace('#', '');
+    const elem = document.getElementById(id);
+    if (elem) {
+      elem.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleStartProjectClick = () => {
+    setMobileMenuOpen(false);
+    if (onOpenProjectModal) {
+      onOpenProjectModal();
+    } else {
+      const elem = document.getElementById('project') || document.getElementById('contact');
+      if (elem) {
+        elem.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <>
@@ -31,17 +67,21 @@ export default function Navbar({ onOpenProjectModal }) {
           right: 0,
           zIndex: 50,
           transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
-          padding: isScrolled ? '0.65rem 0' : '1.35rem 0',
-          backgroundColor: isScrolled ? 'rgba(251, 248, 243, 0.94)' : 'transparent',
+          padding: isScrolled ? '0.65rem 0' : '1.2rem 0',
+          backgroundColor: isScrolled ? 'rgba(251, 248, 243, 0.95)' : 'transparent',
           backdropFilter: isScrolled ? 'blur(14px)' : 'none',
           borderBottom: isScrolled ? '1px solid var(--border-subtle)' : '1px solid transparent',
           boxShadow: isScrolled ? '0 4px 20px rgba(23, 51, 34, 0.05)' : 'none'
         }}
       >
         <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          {/* Left: WebBloom Logo / Wordmark */}
+          {/* Left: WebBloom Logo */}
           <a
-            href="#"
+            href="#home"
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('#home');
+            }}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -65,24 +105,22 @@ export default function Navbar({ onOpenProjectModal }) {
             >
               <Leaf size={isScrolled ? 17 : 19} style={{ transform: 'rotate(-15deg)' }} />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span
-                style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: isScrolled ? '1.15rem' : '1.3rem',
-                  fontWeight: '700',
-                  letterSpacing: '-0.03em',
-                  lineHeight: '1',
-                  color: 'var(--forest)',
-                  transition: 'font-size 0.3s ease'
-                }}
-              >
-                Webbloom.creates
-              </span>
-            </div>
+            <span
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: isScrolled ? '1.15rem' : '1.3rem',
+                fontWeight: '700',
+                letterSpacing: '-0.03em',
+                lineHeight: '1',
+                color: 'var(--forest)',
+                transition: 'font-size 0.3s ease'
+              }}
+            >
+              Webbloom.creates
+            </span>
           </a>
 
-          {/* Center / Right: Minimal Desktop Nav Links */}
+          {/* Desktop Nav Links */}
           <nav
             style={{
               display: 'none',
@@ -101,6 +139,10 @@ export default function Navbar({ onOpenProjectModal }) {
               <a
                 key={link.label}
                 href={link.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(link.href);
+                }}
                 style={{
                   textDecoration: 'none',
                   color: 'var(--charcoal)',
@@ -117,11 +159,11 @@ export default function Navbar({ onOpenProjectModal }) {
             ))}
           </nav>
 
-          {/* Right Action: Primary CTA */}
+          {/* Right Action: CTA & Mobile Hamburger Button */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <button
-              onClick={() => onOpenProjectModal()}
-              className="btn-primary"
+              onClick={handleStartProjectClick}
+              className="btn-primary desktop-cta-btn"
               style={{
                 padding: isScrolled ? '0.6rem 1.35rem' : '0.75rem 1.6rem',
                 fontSize: '0.9rem'
@@ -131,10 +173,11 @@ export default function Navbar({ onOpenProjectModal }) {
               <ArrowUpRight size={16} />
             </button>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Hamburger Toggle Button */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle navigation menu"
+              onClick={() => setMobileMenuOpen(true)}
+              aria-label="Open menu"
+              className="mobile-toggle-btn"
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -148,9 +191,8 @@ export default function Navbar({ onOpenProjectModal }) {
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
               }}
-              className="mobile-toggle-btn"
             >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              <Menu size={20} />
             </button>
           </div>
         </div>
@@ -160,39 +202,91 @@ export default function Navbar({ onOpenProjectModal }) {
       <style>{`
         @media (min-width: 960px) {
           .desktop-nav { display: flex !important; }
+          .desktop-cta-btn { display: inline-flex !important; }
           .mobile-toggle-btn { display: none !important; }
+        }
+        @media (max-width: 959px) {
+          .desktop-nav { display: none !important; }
+          .mobile-toggle-btn { display: flex !important; }
         }
       `}</style>
 
-      {/* Mobile Slide-Out Menu Drawer */}
-      {mobileMenuOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            backgroundColor: 'var(--bg-primary)',
-            zIndex: 49,
-            padding: '6.5rem 2rem 3rem 2rem',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            animation: 'fadeIn 0.25s ease forwards'
-          }}
-        >
+      {/* Backdrop Overlay */}
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          backgroundColor: 'rgba(20, 43, 29, 0.45)',
+          backdropFilter: 'blur(4px)',
+          zIndex: 998,
+          opacity: mobileMenuOpen ? 1 : 0,
+          pointerEvents: mobileMenuOpen ? 'auto' : 'none',
+          transition: 'opacity 0.3s ease'
+        }}
+        onClick={() => setMobileMenuOpen(false)}
+      />
+
+      {/* Mobile Right Side Drawer */}
+      <aside
+        aria-label="Mobile Navigation"
+        style={{
+          position: 'fixed',
+          top: 0,
+          right: 0,
+          bottom: 0,
+          width: '85vw',
+          maxWidth: '340px',
+          backgroundColor: 'var(--bg-primary)',
+          zIndex: 999,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          padding: '2rem 1.75rem 2.5rem 1.75rem',
+          boxShadow: '-10px 0 30px rgba(0, 0, 0, 0.15)',
+          transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(100%)',
+          transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+          overflowY: 'auto'
+        }}
+      >
+        <div>
+          {/* Drawer Top Header with Brand & Close Button */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2.5rem' }}>
+            <span className="badge-tag" style={{ fontSize: '0.75rem' }}>
+              <Sparkles size={12} /> Webbloom.creates
+            </span>
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close menu"
+              style={{
+                width: '38px',
+                height: '38px',
+                borderRadius: '50%',
+                border: '1px solid var(--border-medium)',
+                backgroundColor: 'var(--bg-secondary)',
+                color: 'var(--forest)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer'
+              }}
+            >
+              <X size={20} />
+            </button>
+          </div>
+
+          {/* Navigation Links Stream */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-            <div style={{ marginBottom: '0.75rem' }}>
-              <span className="badge-tag">
-                <Sparkles size={13} /> Studio @web.bloomcreates
-              </span>
-            </div>
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(link.href);
+                }}
                 style={{
                   fontFamily: 'var(--font-serif)',
-                  fontSize: '2.1rem',
+                  fontSize: '1.8rem',
                   fontWeight: '600',
                   color: 'var(--forest)',
                   textDecoration: 'none',
@@ -204,29 +298,27 @@ export default function Navbar({ onOpenProjectModal }) {
                 }}
               >
                 {link.label}
-                <ArrowUpRight size={22} style={{ color: 'var(--sage)' }} />
+                <ArrowUpRight size={20} style={{ color: 'var(--sage)' }} />
               </a>
             ))}
           </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem' }}>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenProjectModal();
-              }}
-              className="btn-primary"
-              style={{ width: '100%', padding: '1.1rem', fontSize: '1.02rem', justifyContent: 'center' }}
-            >
-              Start a Project
-              <ArrowUpRight size={18} />
-            </button>
-            <p style={{ textAlign: 'center', fontSize: '0.85rem', color: 'var(--charcoal-muted)' }}>
-              Accepting new client builds • Responding within 24 hours
-            </p>
-          </div>
         </div>
-      )}
+
+        {/* Drawer Footer Action */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2.5rem' }}>
+          <button
+            onClick={handleStartProjectClick}
+            className="btn-primary"
+            style={{ width: '100%', padding: '1rem', fontSize: '1rem', justifyContent: 'center' }}
+          >
+            Start a Project
+            <ArrowUpRight size={18} />
+          </button>
+          <p style={{ textAlign: 'center', fontSize: '0.8rem', color: 'var(--charcoal-muted)' }}>
+            Accepting Q4 Client Builds
+          </p>
+        </div>
+      </aside>
     </>
   );
 }

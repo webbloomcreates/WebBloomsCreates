@@ -174,7 +174,16 @@ export default function FAQ({ onOpenProjectModal }) {
                 Have a specific question about your project?
               </h4>
               <p style={{ fontSize: '0.96rem', color: 'var(--charcoal-muted)' }}>
-                Message us on Instagram <strong>{studioInfo.handle}</strong> or send us your details directly through our project form.
+                Message us on Instagram{' '}
+                <a
+                  href={studioInfo.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: 'var(--forest)', fontWeight: '700', textDecoration: 'underline' }}
+                >
+                  {studioInfo.handle}
+                </a>{' '}
+                or send us your details directly through our project form.
               </p>
             </div>
 

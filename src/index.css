@@ -57,6 +57,8 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -65,13 +67,15 @@ body {
   color: var(--charcoal);
   line-height: 1.65;
   overflow-x: hidden;
+  width: 100%;
+  position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Ensure smooth scroll margin below fixed navbar for all sections */
 section, [id] {
-  scroll-margin-top: 90px;
+  scroll-margin-top: 85px;
 }
 
 /* Selection & Focus */
@@ -92,11 +96,18 @@ h1, h2, h3, h4, .font-serif {
   line-height: 1.12;
   color: var(--forest);
   letter-spacing: -0.02em;
+  overflow-wrap: break-word;
 }
 
 p {
   color: var(--charcoal-light);
-  font-size: 1.05rem;
+  font-size: clamp(0.96rem, 1.4vw, 1.05rem);
+  overflow-wrap: break-word;
+}
+
+img, svg, video {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Container & Sections */
@@ -105,43 +116,43 @@ p {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: clamp(1.25rem, 4vw, 2.5rem);
-  padding-right: clamp(1.25rem, 4vw, 2.5rem);
+  padding-left: clamp(1.1rem, 4vw, 2.5rem);
+  padding-right: clamp(1.1rem, 4vw, 2.5rem);
 }
 
 .section-padding {
-  padding-top: clamp(4.5rem, 8vw, 7.5rem);
-  padding-bottom: clamp(4.5rem, 8vw, 7.5rem);
+  padding-top: clamp(3.75rem, 7vw, 7.5rem);
+  padding-bottom: clamp(3.75rem, 7vw, 7.5rem);
 }
 
 /* Section Header Structure */
 .section-header {
   text-align: center;
   max-width: 760px;
-  margin: 0 auto 4rem auto;
+  margin: 0 auto 3.5rem auto;
 }
 
 .section-header .subheading {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--sage);
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.75rem;
   display: block;
 }
 
 .section-header .heading {
-  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-size: clamp(2.1rem, 4.5vw, 3.8rem);
   color: var(--forest);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.15rem;
   line-height: 1.1;
 }
 
 .section-header .description {
-  font-size: 1.1rem;
+  font-size: clamp(0.96rem, 1.5vw, 1.1rem);
   color: var(--charcoal-light);
-  line-height: 1.7;
+  line-height: 1.65;
 }
 
 /* Buttons & Badges */
@@ -155,7 +166,8 @@ p {
   font-family: var(--font-sans);
   font-weight: 600;
   font-size: 0.95rem;
-  padding: 0.95rem 2rem;
+  padding: 0.85rem 1.8rem;
+  min-height: 46px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--forest);
   cursor: pointer;
@@ -163,6 +175,7 @@ p {
   transition: all var(--transition-smooth);
   box-shadow: 0 4px 14px rgba(23, 51, 34, 0.12);
   letter-spacing: -0.01em;
+  touch-action: manipulation;
 }
 
 .btn-primary:hover {
@@ -183,12 +196,14 @@ p {
   font-family: var(--font-sans);
   font-weight: 600;
   font-size: 0.95rem;
-  padding: 0.95rem 2rem;
+  padding: 0.85rem 1.8rem;
+  min-height: 46px;
   border-radius: var(--radius-pill);
   border: 1.5px solid var(--border-medium);
   cursor: pointer;
   text-decoration: none;
   transition: all var(--transition-smooth);
+  touch-action: manipulation;
 }
 
 .btn-secondary:hover {
@@ -207,10 +222,11 @@ p {
   color: var(--forest);
   border: 1px solid rgba(123, 155, 120, 0.35);
   border-radius: var(--radius-pill);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  max-width: 100%;
 }
 
 .badge-dark {
@@ -223,7 +239,7 @@ p {
 @keyframes heroFadeUp {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -249,7 +265,7 @@ p {
   }
 }
 
-/* Hero Entrance Animations with Fill-Mode Both for Safe Fallbacks */
+/* Hero Entrance Animations */
 .animate-hero-1 {
   animation: heroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
 }
@@ -284,15 +300,16 @@ p {
   z-index: 0;
 }
 
-/* Card Hover Interactions */
-.hover-card-lift {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
-}
-
-.hover-card-lift:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--forest) !important;
+/* Desktop Only Card Hover Lift */
+@media (hover: hover) {
+  .hover-card-lift {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  }
+  .hover-card-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--forest) !important;
+  }
 }
 
 /* Inputs & Form Controls - 16px Base Font Prevents iOS Auto-Zoom */
@@ -306,6 +323,7 @@ textarea {
   font-family: var(--font-sans);
   color: var(--charcoal);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  touch-action: manipulation;
 }
 
 input:focus,
@@ -314,6 +332,23 @@ textarea:focus {
   outline: none;
   border-color: var(--forest) !important;
   box-shadow: 0 0 0 3px rgba(23, 51, 34, 0.1) !important;
+}
+
+/* Mobile Layout Overrides across phone viewports (320px - 430px) */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+  }
+
+  .section-header {
+    margin-bottom: 2.25rem;
+  }
+
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 /* Custom Scrollbar */
