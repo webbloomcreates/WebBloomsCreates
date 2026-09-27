@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUpRight, Globe, Sparkles, ExternalLink, ShieldCheck, ArrowRight, Layers, Eye } from 'lucide-react';
+import { ArrowUpRight, Globe, Sparkles, ExternalLink, ShieldCheck, ArrowRight, Layers, Eye, Play, Pause } from 'lucide-react';
 import { portfolioData } from '../data/studioData';
 import ProjectPreviewModal from './ProjectPreviewModal';
 import ScrollReveal from './ScrollReveal';
@@ -7,6 +7,7 @@ import ScrollReveal from './ScrollReveal';
 export default function Portfolio({ onOpenProjectModal }) {
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [isMarqueePaused, setIsMarqueePaused] = useState(false);
 
   const categories = [
     { label: 'All Work', key: 'all' },
@@ -24,6 +25,9 @@ export default function Portfolio({ onOpenProjectModal }) {
         return p.categoryKey === activeCategory;
       });
 
+  // Duplicate list for infinite smooth marquee reel
+  const marqueeList = [...portfolioData, ...portfolioData];
+
   return (
     <section
       id="work"
@@ -32,13 +36,14 @@ export default function Portfolio({ onOpenProjectModal }) {
         backgroundColor: 'var(--bg-card)',
         borderTop: '1px solid var(--border-subtle)',
         borderBottom: '1px solid var(--border-subtle)',
-        position: 'relative'
+        position: 'relative',
+        overflow: 'hidden'
       }}
     >
       <div className="container">
         {/* Section Header */}
         <ScrollReveal>
-          <div className="section-header" style={{ marginBottom: '3.5rem' }}>
+          <div className="section-header" style={{ marginBottom: '3rem' }}>
             <span className="subheading">SELECTED STUDIO WORK</span>
             <h2 className="heading" style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.8rem)' }}>
               Websites designed to make your business look extraordinary.
@@ -49,14 +54,225 @@ export default function Portfolio({ onOpenProjectModal }) {
           </div>
         </ScrollReveal>
 
-        {/* Category Filters */}
+        {/* --- ANIMATED MOVING CARDS MARQUEE REEL --- */}
         <ScrollReveal delay={0.1}>
+          <div
+            style={{
+              position: 'relative',
+              marginBottom: '4rem',
+              marginTop: '1rem'
+            }}
+          >
+            {/* Reel Header Label & Pause Control */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginBottom: '1.25rem',
+                padding: '0 0.5rem'
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                <span
+                  style={{
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    backgroundColor: 'var(--sage)',
+                    display: 'inline-block',
+                    animation: 'pulseGlow 2s infinite'
+                  }}
+                />
+                <span
+                  style={{
+                    fontSize: '0.78rem',
+                    fontWeight: '700',
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    color: 'var(--forest)'
+                  }}
+                >
+                  LIVE SHOWCASE REEL • ANIMATED CARDS (HOVER TO PAUSE & INSPECT)
+                </span>
+              </div>
+
+              <button
+                onClick={() => setIsMarqueePaused(!isMarqueePaused)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  fontSize: '0.76rem',
+                  fontWeight: '700',
+                  color: 'var(--forest)',
+                  backgroundColor: 'var(--bg-secondary)',
+                  border: '1px solid var(--border-medium)',
+                  padding: '0.35rem 0.85rem',
+                  borderRadius: 'var(--radius-pill)',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                {isMarqueePaused ? <Play size={12} /> : <Pause size={12} />}
+                {isMarqueePaused ? 'Resume Motion' : 'Pause Motion'}
+              </button>
+            </div>
+
+            {/* Marquee Track Container */}
+            <div
+              className="portfolio-marquee-wrapper"
+              onMouseEnter={() => setIsMarqueePaused(true)}
+              onMouseLeave={() => setIsMarqueePaused(false)}
+              style={{
+                overflow: 'hidden',
+                position: 'relative',
+                borderRadius: 'var(--radius-lg)',
+                border: '1px solid var(--border-medium)',
+                backgroundColor: 'var(--bg-primary)',
+                padding: '1.75rem 0',
+                boxShadow: 'var(--shadow-md)'
+              }}
+            >
+              {/* Fade Edges Masks */}
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  left: 0,
+                  width: '80px',
+                  background: 'linear-gradient(90deg, var(--bg-primary) 0%, transparent 100%)',
+                  zIndex: 3,
+                  pointerEvents: 'none'
+                }}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  bottom: 0,
+                  right: 0,
+                  width: '80px',
+                  background: 'linear-gradient(-90deg, var(--bg-primary) 0%, transparent 100%)',
+                  zIndex: 3,
+                  pointerEvents: 'none'
+                }}
+              />
+
+              <div
+                className={`portfolio-marquee-track ${isMarqueePaused ? 'paused-track' : ''}`}
+                style={{
+                  display: 'flex',
+                  gap: '1.5rem',
+                  width: 'max-content',
+                  animation: 'portfolioMarquee 42s linear infinite',
+                  animationPlayState: isMarqueePaused ? 'paused' : 'running',
+                  willChange: 'transform'
+                }}
+              >
+                {marqueeList.map((project, itemIdx) => (
+                  <div
+                    key={`${project.id}-${itemIdx}`}
+                    onClick={() => setSelectedProject(project)}
+                    className="moving-card-item"
+                    style={{
+                      width: '320px',
+                      flexShrink: 0,
+                      backgroundColor: 'var(--bg-secondary)',
+                      borderRadius: 'var(--radius-md)',
+                      border: '1px solid var(--border-medium)',
+                      overflow: 'hidden',
+                      boxShadow: 'var(--shadow-sm)',
+                      cursor: 'pointer',
+                      transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between'
+                    }}
+                  >
+                    {/* Top Banner Gradient */}
+                    <div
+                      style={{
+                        height: '140px',
+                        background: project.imageBg,
+                        padding: '1rem',
+                        position: 'relative',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between'
+                      }}
+                    >
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <span
+                          style={{
+                            fontSize: '0.68rem',
+                            fontWeight: '700',
+                            backgroundColor: 'rgba(255, 255, 255, 0.22)',
+                            backdropFilter: 'blur(6px)',
+                            color: '#ffffff',
+                            padding: '0.2rem 0.65rem',
+                            borderRadius: 'var(--radius-pill)',
+                            textTransform: 'uppercase'
+                          }}
+                        >
+                          {project.categoryKey}
+                        </span>
+
+                        <span
+                          style={{
+                            width: '28px',
+                            height: '28px',
+                            borderRadius: '50%',
+                            backgroundColor: 'rgba(255,255,255,0.9)',
+                            color: 'var(--forest)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+                          }}
+                        >
+                          <Eye size={14} />
+                        </span>
+                      </div>
+
+                      <div style={{ color: '#ffffff', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>
+                        <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: '#ffffff', lineHeight: '1.2' }}>
+                          {project.name}
+                        </h4>
+                      </div>
+                    </div>
+
+                    {/* Bottom Details */}
+                    <div style={{ padding: '1rem 1.15rem 1.15rem 1.15rem' }}>
+                      <p style={{ fontSize: '0.84rem', color: 'var(--charcoal-light)', lineHeight: '1.45', marginBottom: '0.85rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                        {project.tagline}
+                      </p>
+
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--border-subtle)', paddingTop: '0.75rem' }}>
+                        <span style={{ fontSize: '0.76rem', fontWeight: '600', color: 'var(--sage)' }}>
+                          {project.client}
+                        </span>
+                        <span style={{ fontSize: '0.78rem', fontWeight: '700', color: 'var(--forest)', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}>
+                          Quick View <ArrowRight size={13} />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Category Filters */}
+        <ScrollReveal delay={0.15}>
           <div
             style={{
               display: 'flex',
               justifyContent: 'center',
               gap: '0.65rem',
-              marginBottom: '4.5rem',
+              marginBottom: '3.5rem',
               flexWrap: 'wrap'
             }}
           >
@@ -87,14 +303,14 @@ export default function Portfolio({ onOpenProjectModal }) {
           </div>
         </ScrollReveal>
 
-        {/* Editorial Projects Layout Stream */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '5rem', marginBottom: '5rem' }}>
+        {/* Detailed Showcase Stream Cards */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '4.5rem', marginBottom: '5rem' }}>
           {filteredProjects.map((project, idx) => {
             const isFullWidth = project.layoutType === 'full-width';
             const isAlternatingRight = project.layoutType === 'alternating-right';
 
             return (
-              <ScrollReveal key={project.id} delay={idx * 0.1}>
+              <ScrollReveal key={project.id} delay={idx * 0.08}>
                 <div
                   className="portfolio-item-card"
                   style={{
@@ -105,7 +321,7 @@ export default function Portfolio({ onOpenProjectModal }) {
                     boxShadow: 'var(--shadow-md)',
                     transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                     display: 'grid',
-                    gridTemplateColumns: isFullWidth ? '1fr' : '1fr',
+                    gridTemplateColumns: '1fr',
                     gap: '0',
                     position: 'relative'
                   }}
@@ -125,14 +341,15 @@ export default function Portfolio({ onOpenProjectModal }) {
                     }}
                     className="portfolio-img-box"
                   >
-                    {/* Subtle Background Pattern */}
+                    {/* Subtle Dot Matrix Pattern */}
                     <div
                       style={{
                         position: 'absolute',
                         inset: 0,
                         opacity: 0.08,
                         backgroundImage: 'radial-gradient(circle at 2px 2px, #ffffff 1px, transparent 0)',
-                        backgroundSize: '24px 24px'
+                        backgroundSize: '24px 24px',
+                        pointerEvents: 'none'
                       }}
                     />
 
@@ -141,8 +358,8 @@ export default function Portfolio({ onOpenProjectModal }) {
                       style={{
                         backgroundColor: 'var(--bg-primary)',
                         borderRadius: 'var(--radius-md)',
-                        border: '1px solid rgba(255, 255, 255, 0.2)',
-                        boxShadow: '0 20px 50px rgba(0, 0, 0, 0.25)',
+                        border: '1px solid rgba(255, 255, 255, 0.25)',
+                        boxShadow: '0 20px 50px rgba(0, 0, 0, 0.28)',
                         overflow: 'hidden',
                         transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
                         position: 'relative',
@@ -150,7 +367,7 @@ export default function Portfolio({ onOpenProjectModal }) {
                       }}
                       className="mockup-frame-hover"
                     >
-                      {/* Mockup Header Bar */}
+                      {/* Browser Mockup Header Bar */}
                       <div
                         style={{
                           backgroundColor: 'var(--bg-card)',
@@ -189,7 +406,7 @@ export default function Portfolio({ onOpenProjectModal }) {
                         </span>
                       </div>
 
-                      {/* Mockup Content Canvas Preview */}
+                      {/* Mockup Canvas */}
                       <div
                         style={{
                           padding: '1.75rem 1.5rem',
@@ -239,7 +456,7 @@ export default function Portfolio({ onOpenProjectModal }) {
                     </div>
                   </div>
 
-                  {/* Editorial Details & Content Box */}
+                  {/* Details Column */}
                   <div
                     style={{
                       gridOrder: isAlternatingRight ? 1 : 2,
@@ -251,7 +468,7 @@ export default function Portfolio({ onOpenProjectModal }) {
                     }}
                   >
                     <div>
-                      {/* Category Tag & Year */}
+                      {/* Tag & Year */}
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
                         <span className="badge-tag">
                           <Sparkles size={13} /> {project.category}
@@ -261,7 +478,7 @@ export default function Portfolio({ onOpenProjectModal }) {
                         </span>
                       </div>
 
-                      {/* Project Title */}
+                      {/* Title */}
                       <h3
                         className="portfolio-title-text"
                         style={{
@@ -281,7 +498,7 @@ export default function Portfolio({ onOpenProjectModal }) {
                         {project.description}
                       </p>
 
-                      {/* Services Provided */}
+                      {/* Services */}
                       <div style={{ marginBottom: '1.75rem' }}>
                         <span style={{ fontSize: '0.78rem', fontWeight: '700', color: 'var(--forest)', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '0.6rem' }}>
                           SERVICES PROVIDED:
@@ -306,7 +523,7 @@ export default function Portfolio({ onOpenProjectModal }) {
                         </div>
                       </div>
 
-                      {/* Technologies Used */}
+                      {/* Technologies */}
                       <div style={{ marginBottom: '2.25rem' }}>
                         <span style={{ fontSize: '0.78rem', fontWeight: '700', color: 'var(--sage)', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '0.5rem' }}>
                           TECHNOLOGIES:
@@ -425,23 +642,51 @@ export default function Portfolio({ onOpenProjectModal }) {
         />
       )}
 
-      {/* Responsive Layout CSS for Editorial Portfolio */}
+      {/* CSS Animations & Responsive Rules */}
       <style>{`
+        @keyframes portfolioMarquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        @keyframes pulseGlow {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(0.85); }
+        }
+
+        .moving-card-item:hover {
+          transform: translateY(-8px) scale(1.02);
+          border-color: var(--forest) !important;
+          box-shadow: 0 20px 40px -10px rgba(23, 51, 34, 0.18) !important;
+        }
+
         @media (min-width: 960px) {
           .portfolio-item-card {
             grid-template-columns: 1.15fr 0.85fr !important;
           }
         }
-        .portfolio-item-card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 24px 48px -12px rgba(23, 51, 34, 0.12) !important;
-          border-color: var(--sage) !important;
+
+        @media (hover: hover) {
+          .portfolio-item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 24px 48px -12px rgba(23, 51, 34, 0.14) !important;
+            border-color: var(--forest) !important;
+          }
+          .portfolio-item-card:hover .mockup-frame-hover {
+            transform: scale(1.02);
+          }
+          .portfolio-item-card:hover .portfolio-title-text {
+            color: var(--forest-light) !important;
+          }
         }
-        .portfolio-item-card:hover .mockup-frame-hover {
-          transform: scale(1.02);
-        }
-        .portfolio-item-card:hover .portfolio-title-text {
-          color: var(--forest-light) !important;
+
+        @media (prefers-reduced-motion: reduce) {
+          .portfolio-marquee-track {
+            animation: none !important;
+          }
+          .moving-card-item, .portfolio-item-card {
+            transition: none !important;
+          }
         }
       `}</style>
     </section>
