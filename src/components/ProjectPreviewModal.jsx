@@ -4,6 +4,15 @@ import { X, CheckCircle2, ArrowUpRight, ExternalLink, Sparkles, Code2, Globe } f
 export default function ProjectPreviewModal({ project, onClose, onOpenProjectModal }) {
   if (!project) return null;
 
+  const getImageUrl = (imgPath) => {
+    if (!imgPath) return null;
+    if (imgPath.startsWith('http')) return imgPath;
+    const cleanPath = imgPath.replace(/^\.?\//, '');
+    return `${import.meta.env.BASE_URL}${cleanPath}`;
+  };
+
+  const imageSrc = getImageUrl(project.image);
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div
@@ -53,80 +62,155 @@ export default function ProjectPreviewModal({ project, onClose, onOpenProjectMod
         {/* Modal Body */}
         <div style={{ padding: '2rem' }}>
           {/* Visual Showcase Banner */}
-          <div
-            style={{
-              height: '240px',
-              borderRadius: 'var(--radius-md)',
-              background: project.imageBg,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              padding: '1.75rem',
-              color: '#ffffff',
-              marginBottom: '2rem',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-          >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-              <span
+          {project.image ? (
+            <div
+              style={{
+                borderRadius: 'var(--radius-md)',
+                border: '1px solid var(--border-medium)',
+                backgroundColor: 'var(--bg-primary)',
+                overflow: 'hidden',
+                marginBottom: '2rem',
+                boxShadow: 'var(--shadow-md)'
+              }}
+            >
+              {/* Browser Header Bar */}
+              <div
                 style={{
-                  backgroundColor: 'rgba(255, 255, 255, 0.18)',
-                  backdropFilter: 'blur(8px)',
-                  padding: '0.35rem 0.9rem',
-                  borderRadius: 'var(--radius-pill)',
-                  fontSize: '0.8rem',
-                  fontWeight: '600'
+                  backgroundColor: 'var(--bg-card)',
+                  padding: '0.65rem 1rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  borderBottom: '1px solid var(--border-subtle)'
                 }}
               >
-                Client: {project.client}
-              </span>
+                <div style={{ display: 'flex', gap: '0.35rem' }}>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#E06C75' }} />
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#E5C07B' }} />
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#98C379' }} />
+                </div>
 
-              {project.liveUrl ? (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <div
                   style={{
-                    backgroundColor: project.accentColor || 'var(--sage)',
-                    color: 'var(--forest)',
-                    padding: '0.35rem 0.9rem',
+                    backgroundColor: 'var(--bg-secondary)',
+                    padding: '0.2rem 0.85rem',
                     borderRadius: 'var(--radius-pill)',
-                    fontSize: '0.8rem',
-                    fontWeight: '700',
-                    textDecoration: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.4rem'
+                    fontSize: '0.74rem',
+                    color: 'var(--charcoal-muted)',
+                    fontFamily: 'monospace'
                   }}
                 >
-                  <Globe size={13} /> View Live Demo <ExternalLink size={12} />
-                </a>
-              ) : (
+                  {project.liveUrl || 'https://lavs-studio.github.io/LavsStudio/'}
+                </div>
+
+                {project.liveUrl ? (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontSize: '0.78rem',
+                      fontWeight: '700',
+                      color: 'var(--forest)',
+                      textDecoration: 'none',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.3rem',
+                      backgroundColor: 'var(--sage-tint)',
+                      padding: '0.25rem 0.75rem',
+                      borderRadius: 'var(--radius-pill)'
+                    }}
+                  >
+                    View Live Site <ExternalLink size={12} />
+                  </a>
+                ) : null}
+              </div>
+
+              {/* Screenshot Display */}
+              <div style={{ position: 'relative', width: '100%', maxHeight: '360px', overflowY: 'auto' }}>
+                <img
+                  src={imageSrc}
+                  alt={project.name}
+                  style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover', objectPosition: 'top' }}
+                />
+              </div>
+            </div>
+          ) : (
+            <div
+              style={{
+                height: '240px',
+                borderRadius: 'var(--radius-md)',
+                background: project.imageBg,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                padding: '1.75rem',
+                color: '#ffffff',
+                marginBottom: '2rem',
+                position: 'relative',
+                overflow: 'hidden'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <span
                   style={{
-                    backgroundColor: project.accentColor || 'var(--sage)',
-                    color: 'var(--forest)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.18)',
+                    backdropFilter: 'blur(8px)',
                     padding: '0.35rem 0.9rem',
                     borderRadius: 'var(--radius-pill)',
                     fontSize: '0.8rem',
-                    fontWeight: '700'
+                    fontWeight: '600'
                   }}
                 >
-                  Bespoke Client Build
+                  Client: {project.client}
                 </span>
-              )}
-            </div>
 
-            <div>
-              <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.8rem', color: '#ffffff', marginBottom: '0.4rem' }}>
-                {project.tagline}
-              </h4>
-              <p style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.85)' }}>
-                Full mobile-first custom website built by web.bloomcreates.
-              </p>
+                {project.liveUrl ? (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      backgroundColor: project.accentColor || 'var(--sage)',
+                      color: 'var(--forest)',
+                      padding: '0.35rem 0.9rem',
+                      borderRadius: 'var(--radius-pill)',
+                      fontSize: '0.8rem',
+                      fontWeight: '700',
+                      textDecoration: 'none',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.4rem'
+                    }}
+                  >
+                    <Globe size={13} /> View Live Demo <ExternalLink size={12} />
+                  </a>
+                ) : (
+                  <span
+                    style={{
+                      backgroundColor: project.accentColor || 'var(--sage)',
+                      color: 'var(--forest)',
+                      padding: '0.35rem 0.9rem',
+                      borderRadius: 'var(--radius-pill)',
+                      fontSize: '0.8rem',
+                      fontWeight: '700'
+                    }}
+                  >
+                    Bespoke Client Build
+                  </span>
+                )}
+              </div>
+
+              <div>
+                <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.8rem', color: '#ffffff', marginBottom: '0.4rem' }}>
+                  {project.tagline}
+                </h4>
+                <p style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, 0.85)' }}>
+                  Full mobile-first custom website built by web.bloomcreates.
+                </p>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Project Details Grid */}
           <div
@@ -264,7 +348,7 @@ export default function ProjectPreviewModal({ project, onClose, onOpenProjectMod
               }}
               className="btn-primary"
             >
-              Start a Project Like This
+              Start Your Website Like This
               <ArrowUpRight size={16} />
             </button>
           </div>

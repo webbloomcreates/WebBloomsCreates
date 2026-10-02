@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { Check, Send, Instagram, Mail, CheckCircle2, Loader2, Sparkles, MessageCircle, ArrowRight, Copy, CheckCheck, ExternalLink } from 'lucide-react';
 import { submitProjectRequest } from '../services/projectService';
 import { studioInfo } from '../data/studioData';
@@ -133,7 +134,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
   };
 
   const buildInquiryMessage = (data) => {
-    const parts = ["Hi WebBloomCreates! 👋\n\nI'd like to discuss a website project."];
+    const parts = ["Hi Web.BloomsCreates! 👋\n\nI'd like to discuss a website project."];
 
     const projectTypeVal = data.service || data.projectType || data.selectedPackage;
     if (projectTypeVal && projectTypeVal.trim()) {
@@ -234,7 +235,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
     setIsSubmitting(true);
     setErrors({});
 
-    // 1. Generate inquiry message
+    // 1. Generate full inquiry message with all details
     const messageText = buildInquiryMessage(formData);
     setGeneratedMessage(messageText);
 
@@ -252,8 +253,13 @@ export default function ProjectRequestSection({ preselectedPackage }) {
     setIsSubmitting(false);
     setIsSubmitted(true);
 
-    // 4. Open Instagram destination in new tab/window
-    window.open(studioInfo.instagramUrl, '_blank', 'noopener,noreferrer');
+    // 4. Open based on preferred contact channel
+    if (formData.preferredContactMethod === 'Email') {
+      const mailtoUrl = `mailto:${studioInfo.email}?subject=${encodeURIComponent("Website Project Inquiry — " + formData.clientName)}&body=${encodeURIComponent(messageText)}`;
+      window.location.href = mailtoUrl;
+    } else {
+      window.open(studioInfo.instagramUrl, '_blank', 'noopener,noreferrer');
+    }
   };
 
   return (
@@ -273,7 +279,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
         {/* Section Header Label */}
         <ScrollReveal>
           <div style={{ marginBottom: '2.5rem' }}>
-            <span className="subheading">START A PROJECT</span>
+            <span className="subheading">START YOUR WEBSITE</span>
           </div>
         </ScrollReveal>
 
@@ -438,10 +444,61 @@ export default function ProjectRequestSection({ preselectedPackage }) {
                       </span>
                     </div>
                   </a>
+
+                  {/* WhatsApp Direct Link */}
+                  <a
+                    href={`https://wa.me/${studioInfo.whatsapp.replace(/[^0-9]/g, '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.85rem',
+                      color: 'var(--forest)',
+                      textDecoration: 'none',
+                      padding: '0.85rem 1.1rem',
+                      borderRadius: 'var(--radius-sm)',
+                      backgroundColor: 'var(--bg-primary)',
+                      border: '1px solid var(--border-subtle)',
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--forest)';
+                      e.currentTarget.style.backgroundColor = 'var(--sage-tint)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                      e.currentTarget.style.backgroundColor = 'var(--bg-primary)';
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: '36px',
+                        height: '36px',
+                        borderRadius: '50%',
+                        backgroundColor: 'var(--sage-tint)',
+                        color: 'var(--forest)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0
+                      }}
+                    >
+                      <MessageCircle size={18} />
+                    </div>
+                    <div>
+                      <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--sage)', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'block' }}>
+                        WHATSAPP CHAT
+                      </span>
+                      <span style={{ fontSize: '0.96rem', fontWeight: '700', color: 'var(--forest)' }}>
+                        {studioInfo.whatsapp}
+                      </span>
+                    </div>
+                  </a>
                 </div>
 
                 <p style={{ fontSize: '0.86rem', color: 'var(--charcoal-muted)', lineHeight: '1.5' }}>
-                  Prefer to message us directly? You can reach us on Instagram or email.
+                  Prefer to message us directly? Reach us via Instagram, Email, or WhatsApp.
                 </p>
               </div>
             </div>
@@ -460,7 +517,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
               }}
             >
               {isSubmitted ? (
-                /* INSTAGRAM DIRECTED CONFIRMATION SCREEN */
+                /* INQUIRY CONFIRMATION & SENDING SCREEN */
                 <div style={{ textAlign: 'center', padding: '1.25rem 0.25rem' }}>
                   <div
                     style={{
@@ -476,7 +533,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
                       border: '1px solid rgba(163, 194, 158, 0.5)'
                     }}
                   >
-                    <Instagram size={36} />
+                    <CheckCircle2 size={36} />
                   </div>
 
                   <h3
@@ -488,7 +545,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
                       lineHeight: '1.2'
                     }}
                   >
-                    Inquiry Copied & Instagram Opening! 🎉
+                    Project Details Copied & Ready! 🎉
                   </h3>
 
                   <p
@@ -500,9 +557,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
                       margin: '0 auto 1.5rem auto'
                     }}
                   >
-                    {isCopied
-                      ? 'Your inquiry has been copied. Paste it into our Instagram DM (@web.bloomcreates) and send it!'
-                      : 'Opening Instagram DM. You can copy your message below and paste it into our DM.'}
+                    Your full project details have been formatted and copied to your clipboard. Send them directly via your preferred platform below:
                   </p>
 
                   {/* Formatted Message Box */}
@@ -518,7 +573,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
                   >
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
                       <span style={{ fontSize: '0.78rem', fontWeight: '700', color: 'var(--sage)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                        GENERATED INQUIRY MESSAGE:
+                        FORMATTED PROJECT SUMMARY:
                       </span>
                       <span style={{ fontSize: '0.75rem', fontWeight: '600', color: isCopied ? 'var(--forest)' : 'var(--charcoal-muted)', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
                         {isCopied ? <CheckCheck size={14} /> : <Copy size={14} />}
@@ -546,20 +601,56 @@ export default function ProjectRequestSection({ preselectedPackage }) {
                     </pre>
                   </div>
 
-                  {/* Action Controls */}
+                  {/* Action Controls for Preferred Contact */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                    <a
-                      href={studioInfo.instagramUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-primary"
-                      style={{ width: '100%', padding: '0.95rem', justifyContent: 'center', fontSize: '0.98rem' }}
-                    >
-                      <Instagram size={18} />
-                      Open Instagram DM (@web.bloomcreates) →
-                    </a>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.65rem' }}>
+                      <a
+                        href={studioInfo.instagramUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary"
+                        style={{ padding: '0.85rem 0.6rem', justifyContent: 'center', fontSize: '0.86rem' }}
+                      >
+                        <Instagram size={16} />
+                        Instagram DM
+                      </a>
 
-                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+                      <a
+                        href={`https://wa.me/${studioInfo.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(generatedMessage)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary"
+                        style={{
+                          padding: '0.85rem 0.6rem',
+                          justifyContent: 'center',
+                          fontSize: '0.86rem',
+                          backgroundColor: '#25D366',
+                          borderColor: '#25D366',
+                          color: '#ffffff'
+                        }}
+                      >
+                        <MessageCircle size={16} />
+                        WhatsApp
+                      </a>
+
+                      <a
+                        href={`mailto:${studioInfo.email}?subject=${encodeURIComponent("Website Project Inquiry — " + (formData.clientName || "Client"))}&body=${encodeURIComponent(generatedMessage)}`}
+                        className="btn-primary"
+                        style={{
+                          padding: '0.85rem 0.6rem',
+                          justifyContent: 'center',
+                          fontSize: '0.86rem',
+                          backgroundColor: 'var(--sage)',
+                          borderColor: 'var(--sage)',
+                          color: 'var(--forest)'
+                        }}
+                      >
+                        <Mail size={16} />
+                        Direct Email
+                      </a>
+                    </div>
+
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginTop: '0.25rem' }}>
                       <button
                         type="button"
                         onClick={async () => {
@@ -569,7 +660,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
                         className="btn-secondary"
                         style={{ flex: '1 1 140px', padding: '0.8rem', fontSize: '0.88rem', justifyContent: 'center' }}
                       >
-                        {isCopied ? '✓ Message Copied' : 'Copy Message Again'}
+                        {isCopied ? '✓ Details Copied' : 'Copy Details Again'}
                       </button>
 
                       <button
@@ -578,7 +669,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
                         className="btn-secondary"
                         style={{ flex: '1 1 140px', padding: '0.8rem', fontSize: '0.88rem', justifyContent: 'center' }}
                       >
-                        Edit Inquiry Details
+                        Edit Details
                       </button>
                     </div>
                   </div>

@@ -138,7 +138,7 @@ export default function Footer({ onOpenProjectModal }) {
                     textAlign: 'left'
                   }}
                 >
-                  Start a Project →
+                  Start your website →
                 </button>
               </li>
             </ul>
@@ -246,11 +246,11 @@ export default function Footer({ onOpenProjectModal }) {
           }}
         >
           <div>
-            © 2026 Webbloom.creates. All rights reserved.
+            © 2026 Web.BloomsCreates. All rights reserved.
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--sage-muted)', fontWeight: '500' }}>
-            Built with care by Webbloom.creates.
+            Built with care by Web.BloomsCreates.
           </div>
         </div>
       </div>

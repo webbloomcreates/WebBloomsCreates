@@ -1,11 +1,11 @@
 export const studioInfo = {
-  name: "Webbloom.creates",
+  name: "Web.BloomCreates",
   tagline: "Websites • Design • Growth",
   shortDescription: "We design and build modern websites for businesses, brands and individuals.",
   handle: "@web.bloomcreates",
   instagramUrl: "https://instagram.com/web.bloomcreates",
   email: "webbloom.creates@gmail.com", // Official Studio Email
-  whatsapp: "+91 98765 43210", // [Editable WhatsApp Number]
+  whatsapp: "+91 90596 81030", // WhatsApp Contact
   location: "India / Worldwide Remote",
   availability: "Accepting Q4 Builds"
 };
@@ -241,6 +241,26 @@ export const servicesData = [
 
 export const portfolioData = [
   {
+    id: "lavs-studio",
+    name: "Lavs Studio",
+    category: "Business & Lifestyle Studio",
+    categoryKey: "service",
+    year: "2024",
+    client: "Lavs Studio",
+    featured: true,
+    layoutType: "full-width",
+    description: "A soft luxury, elevated essentials and lifestyle business website created for Lavs Studio. Features curated Amazon finds, fashion & skincare edits, Pinterest-worthy recommendations, and direct customer engagement.",
+    services: ["Business Website Design", "Curated Showcase & Edits", "UI/UX Experience System", "Responsive Web Development"],
+    technologies: ["React", "HTML5", "CSS3", "GitHub Pages"],
+    liveUrl: "https://lavs-studio.github.io/LavsStudio/",
+    image: "./lavs-studio.png",
+    caseStudyUrl: null,
+    imageBg: "linear-gradient(135deg, #FAF0F5 0%, #E8D5E3 100%)",
+    accentColor: "#C86D9B",
+    tagline: "Discover elevated essentials for beauty, fashion, and everyday luxury.",
+    features: ["Curated Amazon Finds", "Beauty & Skincare Edits", "Pinterest-Worthy Layout", "Responsive Mobile Design"]
+  },
+  {
     id: "botanical-atelier",
     name: "Aura Floral & Botanical Atelier",
     category: "E-Commerce & Retail",
@@ -260,6 +280,26 @@ export const portfolioData = [
     features: ["Custom Bouquet Selector", "Editorial Product Grid", "Instant Mobile Checkout"]
   },
   {
+    id: "maison-elan-cafe",
+    name: "Maison Élan Coffee & Atelier",
+    category: "Cafe & Culinary Atelier",
+    categoryKey: "restaurant",
+    year: "2024",
+    client: "Maison Élan",
+    featured: true,
+    layoutType: "full-width",
+    description: "An architectural sanctuary of warm aesthetics for a luxury coffee & culinary atelier. Features hand-selected single-origin coffees, 72-hour laminated sourdough viennoiserie, digital signature menu, and table reservations.",
+    services: ["Cafe Website Design", "Digital Signature Menu", "Table Reservation Workflow", "Responsive Web Development"],
+    technologies: ["React", "HTML5", "CSS3", "GitHub Pages"],
+    liveUrl: "https://webbloomcreates.github.io/Cafe-demo/",
+    image: "./cafe-demo.png",
+    caseStudyUrl: null,
+    imageBg: "linear-gradient(135deg, #2D1E18 0%, #4A3228 100%)",
+    accentColor: "#D69F7E",
+    tagline: "Where Modern Coffee Meets Culinary Artistry.",
+    features: ["Digital Signature Menu", "Micro-Lot Beans Showcase", "Online Table Reservation", "Responsive Mobile Experience"]
+  },
+  {
     id: "solis-architects",
     name: "Solis Architectural Studio",
     category: "Portfolio & Architecture",
@@ -277,63 +317,6 @@ export const portfolioData = [
     accentColor: "#E2D9C8",
     tagline: "High-end architectural firm site designed to showcase premium residential portfolios.",
     features: ["Full-bleed Project Sliders", "Asymmetric Layouts", "Lead Qualification Form"]
-  },
-  {
-    id: "maison-bistro",
-    name: "Maison Bistro & Wine Bar",
-    category: "Restaurant & Hospitality",
-    categoryKey: "restaurant",
-    year: "2024",
-    client: "Maison Hospitality Group",
-    featured: false,
-    layoutType: "alternating-right",
-    description: "A warm, moody digital experience for an upscale French bistro. Features an interactive seasonal menu viewer, integrated table booking, and direct private event inquiries.",
-    services: ["Digital Menu Design", "Table Booking System", "Local SEO", "Mobile Order Flow"],
-    technologies: ["React", "Vite", "OpenTable API", "Custom CSS"],
-    liveUrl: "https://maison-bistro-example.com",
-    caseStudyUrl: null,
-    imageBg: "linear-gradient(135deg, #38251C 0%, #211610 100%)",
-    accentColor: "#E5BE9E",
-    tagline: "Upscale culinary experience with live digital reservation booking.",
-    features: ["Interactive Seasonal Menu", "Integrated Reservations", "Private Event Inquiry Form"]
-  },
-  {
-    id: "elena-vance",
-    name: "Elena Vance | Executive Advisory",
-    category: "Personal Brand & Service",
-    categoryKey: "personal-brand",
-    year: "2024",
-    client: "Elena Vance Coaching",
-    featured: false,
-    layoutType: "alternating-left",
-    description: "An authoritative yet warm personal brand site for an executive mentor. Built to convert high-ticket corporate consulting leads with strategic social proof and automated discovery call scheduling.",
-    services: ["Brand Strategy & Messaging", "High-Converting Landing Page", "Calendar Booking Integration"],
-    technologies: ["React", "Vite", "Calendly API", "Custom CSS"],
-    liveUrl: null,
-    caseStudyUrl: "#elena-case-study",
-    imageBg: "linear-gradient(135deg, #1C2D2B 0%, #111C1B 100%)",
-    accentColor: "#9DC0B5",
-    tagline: "High-impact executive personal brand site commanding premium client retainers.",
-    features: ["1-Click Calendar Sync", "Thought Leadership Journal", "Video Intro Showcase"]
-  },
-  {
-    id: "kinfolk-coffee",
-    name: "Kinfolk Artisanal Roasters",
-    category: "E-Commerce & Brand",
-    categoryKey: "ecommerce",
-    year: "2023",
-    client: "Kinfolk Coffee Co.",
-    featured: true,
-    layoutType: "full-width",
-    description: "Rich editorial design reflecting specialty coffee craftsmanship. Features an interactive roast flavor matcher and a monthly recurring bean subscription portal.",
-    services: ["Digital Menu & Store", "Subscription Portal", "Coffee Matcher Configurator"],
-    technologies: ["Shopify Plus", "React Configurator", "GraphQL API", "Custom CSS"],
-    liveUrl: "https://kinfolk-coffee-example.com",
-    caseStudyUrl: null,
-    imageBg: "linear-gradient(135deg, #2D2520 0%, #1F1916 100%)",
-    accentColor: "#D4B499",
-    tagline: "Artisanal coffee roaster with interactive roast finder and subscription portal.",
-    features: ["Interactive Coffee Matcher", "Custom Box Builder", "Subscription Dashboard"]
   }
 ];
 

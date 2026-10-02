@@ -8,6 +8,8 @@ import FAQ from './components/FAQ';
 import ProjectRequestSection from './components/ProjectRequestSection';
 import Footer from './components/Footer';
 import StickyMobileCTA from './components/StickyMobileCTA';
+import LogoBackgroundAnimation from './components/LogoBackgroundAnimation';
+import LogoIntroLoader from './components/LogoIntroLoader';
 
 export default function App() {
   const [selectedPackage, setSelectedPackage] = useState(null);
@@ -23,7 +25,13 @@ export default function App() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative' }}>
+      {/* First Page Initial Animated Logo Loading Curtain */}
+      <LogoIntroLoader />
+
+      {/* Animated Floating Logo Watermark Background */}
+      <LogoBackgroundAnimation />
+
       {/* Navigation Header */}
       <Navbar
         onOpenProjectModal={handleNavigateToProject}

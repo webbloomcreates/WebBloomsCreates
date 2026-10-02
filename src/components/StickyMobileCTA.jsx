@@ -55,7 +55,7 @@ export default function StickyMobileCTA({ onOpenProjectModal }) {
           boxShadow: 'none'
         }}
       >
-        Start Your Project →
+        Start your website →
       </button>
 
       <style>{`

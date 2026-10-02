@@ -399,7 +399,7 @@ export default function ServiceDetailModal({ service, onClose, onSelectService }
             className="btn-primary"
             style={{ padding: '0.85rem 1.8rem', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
           >
-            <span>Start Your Project</span>
+            <span>Start your website</span>
             <ArrowRight size={15} />
           </button>
         </div>

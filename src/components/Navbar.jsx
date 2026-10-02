@@ -116,7 +116,7 @@ export default function Navbar({ onOpenProjectModal }) {
                 transition: 'font-size 0.3s ease'
               }}
             >
-              Webbloom.creates
+              Web.BloomCreates
             </span>
           </a>
 
@@ -169,7 +169,7 @@ export default function Navbar({ onOpenProjectModal }) {
                 fontSize: '0.9rem'
               }}
             >
-              Start a Project
+              Start your website
               <ArrowUpRight size={16} />
             </button>
 
@@ -252,7 +252,7 @@ export default function Navbar({ onOpenProjectModal }) {
           {/* Drawer Top Header with Brand & Close Button */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2.5rem' }}>
             <span className="badge-tag" style={{ fontSize: '0.75rem' }}>
-              <Sparkles size={12} /> Webbloom.creates
+              <Sparkles size={12} /> Web.BloomCreates
             </span>
             <button
               onClick={() => setMobileMenuOpen(false)}
@@ -311,7 +311,7 @@ export default function Navbar({ onOpenProjectModal }) {
             className="btn-primary"
             style={{ width: '100%', padding: '1rem', fontSize: '1rem', justifyContent: 'center' }}
           >
-            Start a Project
+            Start your website
             <ArrowUpRight size={18} />
           </button>
           <p style={{ textAlign: 'center', fontSize: '0.8rem', color: 'var(--charcoal-muted)' }}>
