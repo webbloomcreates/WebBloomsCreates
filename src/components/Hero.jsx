@@ -8,8 +8,8 @@ export default function Hero({ onOpenProjectModal }) {
       aria-label="Hero Section"
       style={{
         position: 'relative',
-        paddingTop: 'clamp(5.5rem, 8vw, 7rem)',
-        paddingBottom: 'clamp(4rem, 7vw, 5.5rem)',
+        paddingTop: 'clamp(4.5rem, 6vw, 5.5rem)',
+        paddingBottom: 'clamp(3rem, 5vw, 4rem)',
         overflow: 'hidden',
         backgroundColor: 'var(--bg-primary)'
       }}
@@ -117,9 +117,9 @@ export default function Hero({ onOpenProjectModal }) {
           {/* Left Column: Editorial Headline & CTAs */}
           <div style={{ maxWidth: '640px' }}>
             {/* Studio Badge Tag */}
-            <div className="animate-hero-1" style={{ marginBottom: '1.25rem' }}>
-              <span className="badge-tag">
-                <Sparkles size={14} style={{ color: 'var(--sage)' }} />
+            <div className="animate-hero-1" style={{ marginBottom: '1rem' }}>
+              <span className="badge-tag" style={{ padding: '0.35rem 0.95rem', fontSize: '0.74rem' }}>
+                <Sparkles size={13} style={{ color: 'var(--sage)' }} />
                 WEB.BLOOMCREATES • BESPOKE WEB DESIGN
               </span>
             </div>
@@ -128,10 +128,10 @@ export default function Hero({ onOpenProjectModal }) {
             <h1
               className="animate-hero-2"
               style={{
-                fontSize: 'clamp(2.6rem, 5.2vw, 4.4rem)',
-                lineHeight: '1.08',
+                fontSize: 'clamp(2rem, 3.8vw, 3.3rem)',
+                lineHeight: '1.1',
                 color: 'var(--forest)',
-                marginBottom: '1.35rem',
+                marginBottom: '1.1rem',
                 letterSpacing: '-0.025em',
                 fontWeight: '600'
               }}
@@ -143,11 +143,11 @@ export default function Hero({ onOpenProjectModal }) {
             <p
               className="animate-hero-3"
               style={{
-                fontSize: 'clamp(1.05rem, 1.8vw, 1.22rem)',
+                fontSize: 'clamp(0.95rem, 1.4vw, 1.08rem)',
                 color: 'var(--charcoal-light)',
-                lineHeight: '1.65',
-                marginBottom: '2.25rem',
-                maxWidth: '560px'
+                lineHeight: '1.6',
+                marginBottom: '1.75rem',
+                maxWidth: '520px'
               }}
             >
               We design and build modern, responsive websites that help businesses establish a stronger presence online.
@@ -159,15 +159,15 @@ export default function Hero({ onOpenProjectModal }) {
               style={{
                 display: 'flex',
                 flexWrap: 'wrap',
-                gap: '1rem',
+                gap: '0.85rem',
                 alignItems: 'center',
-                marginBottom: '2.5rem'
+                marginBottom: '2rem'
               }}
             >
               <button
                 onClick={() => onOpenProjectModal()}
                 className="btn-primary"
-                style={{ padding: '1.05rem 2.2rem', fontSize: '1rem' }}
+                style={{ padding: '0.85rem 1.8rem', fontSize: '0.92rem' }}
                 aria-label="Start your website"
               >
                 Start your website →
@@ -176,7 +176,7 @@ export default function Hero({ onOpenProjectModal }) {
               <a
                 href="#work"
                 className="btn-secondary"
-                style={{ padding: '1.05rem 2.1rem', fontSize: '0.98rem' }}
+                style={{ padding: '0.85rem 1.7rem', fontSize: '0.92rem' }}
               >
                 Explore Our Work
               </a>
@@ -188,23 +188,23 @@ export default function Hero({ onOpenProjectModal }) {
               style={{
                 display: 'flex',
                 flexWrap: 'wrap',
-                gap: '1.5rem',
-                paddingTop: '1.5rem',
+                gap: '1.25rem',
+                paddingTop: '1.25rem',
                 borderTop: '1px solid var(--border-subtle)'
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.86rem', color: 'var(--charcoal-light)', fontWeight: '600' }}>
-                <CheckCircle2 size={16} style={{ color: 'var(--sage)' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.82rem', color: 'var(--charcoal-light)', fontWeight: '600' }}>
+                <CheckCircle2 size={15} style={{ color: 'var(--sage)' }} />
                 Bespoke Design Architecture
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.86rem', color: 'var(--charcoal-light)', fontWeight: '600' }}>
-                <CheckCircle2 size={16} style={{ color: 'var(--sage)' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.82rem', color: 'var(--charcoal-light)', fontWeight: '600' }}>
+                <CheckCircle2 size={15} style={{ color: 'var(--sage)' }} />
                 Mobile-First Engineering
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.86rem', color: 'var(--charcoal-light)', fontWeight: '600' }}>
-                <CheckCircle2 size={16} style={{ color: 'var(--sage)' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.82rem', color: 'var(--charcoal-light)', fontWeight: '600' }}>
+                <CheckCircle2 size={15} style={{ color: 'var(--sage)' }} />
                 100% Client Ownership
               </div>
             </div>
@@ -344,9 +344,9 @@ export default function Hero({ onOpenProjectModal }) {
                   {/* Laptop Live Website Display Canvas */}
                   <div
                     style={{
-                      padding: '1.6rem 1.5rem',
+                      padding: '1.25rem 1.25rem',
                       background: 'linear-gradient(180deg, #FBF8F3 0%, #FFFDF9 100%)',
-                      minHeight: '280px',
+                      minHeight: '220px',
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'space-between',
@@ -404,10 +404,10 @@ export default function Hero({ onOpenProjectModal }) {
                       <h3
                         style={{
                           fontFamily: 'var(--font-serif)',
-                          fontSize: '1.7rem',
+                          fontSize: '1.35rem',
                           color: 'var(--forest)',
                           lineHeight: '1.15',
-                          marginBottom: '0.5rem'
+                          marginBottom: '0.4rem'
                         }}
                       >
                         Savor the rhythm of slow craft.
@@ -513,9 +513,9 @@ export default function Hero({ onOpenProjectModal }) {
             <div
               style={{
                 position: 'absolute',
-                bottom: '-15px',
+                bottom: '-12px',
                 right: '0',
-                width: '185px',
+                width: '150px',
                 zIndex: 25,
                 animation: 'mobileFloat 5.5s ease-in-out infinite 0.8s'
               }}
@@ -554,7 +554,7 @@ export default function Hero({ onOpenProjectModal }) {
                     backgroundColor: '#FAF7F2',
                     borderRadius: '20px',
                     overflow: 'hidden',
-                    minHeight: '260px',
+                    minHeight: '200px',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
