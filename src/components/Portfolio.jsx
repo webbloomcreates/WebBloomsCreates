@@ -477,6 +477,19 @@ export default function Portfolio({ onOpenProjectModal }) {
           .portfolio-slider-controls {
             display: none !important;
           }
+          .portfolio-scroll-container {
+            padding-left: 0.25rem !important;
+            padding-right: 0.25rem !important;
+            gap: 1rem !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+          }
+          .portfolio-hover-card {
+            width: calc(100vw - 2.5rem) !important;
+            max-width: 320px !important;
+            box-sizing: border-box !important;
+          }
         }
       `}</style>
     </section>

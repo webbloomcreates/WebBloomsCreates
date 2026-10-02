@@ -106,6 +106,7 @@ export default function Navbar({ onOpenProjectModal }) {
               <Leaf size={isScrolled ? 17 : 19} style={{ transform: 'rotate(-15deg)' }} />
             </div>
             <span
+              className="navbar-brand-text"
               style={{
                 fontFamily: 'var(--font-sans)',
                 fontSize: isScrolled ? '1.15rem' : '1.3rem',
@@ -209,6 +210,13 @@ export default function Navbar({ onOpenProjectModal }) {
           .desktop-nav { display: none !important; }
           .desktop-cta-btn { display: none !important; }
           .mobile-toggle-btn { display: flex !important; }
+          .navbar-brand-text {
+            font-size: clamp(0.98rem, 4.2vw, 1.2rem) !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            max-width: clamp(160px, 50vw, 240px) !important;
+          }
         }
       `}</style>
 

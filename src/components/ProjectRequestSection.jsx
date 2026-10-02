@@ -134,7 +134,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
   };
 
   const buildInquiryMessage = (data) => {
-    const parts = ["Hi Web.BloomsCreates! 👋\n\nI'd like to discuss a website project."];
+    const parts = ["Hi Web.BloomCreates! 👋\n\nI'd like to discuss a website project."];
 
     const projectTypeVal = data.service || data.projectType || data.selectedPackage;
     if (projectTypeVal && projectTypeVal.trim()) {
@@ -287,7 +287,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: 'clamp(2.5rem, 5vw, 4.5rem)',
             alignItems: 'start'
           }}

@@ -335,19 +335,54 @@ textarea:focus {
 }
 
 /* Mobile Layout Overrides across phone viewports (320px - 430px) */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+  }
+
   .container {
-    padding-left: 1.1rem;
-    padding-right: 1.1rem;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .section-padding {
+    padding-top: clamp(2.5rem, 8vw, 4rem) !important;
+    padding-bottom: clamp(2.5rem, 8vw, 4rem) !important;
   }
 
   .section-header {
-    margin-bottom: 2.25rem;
+    margin-bottom: 2rem !important;
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+  }
+
+  .badge-tag {
+    font-size: 0.72rem !important;
+    padding: 0.35rem 0.85rem !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    text-align: center !important;
+    line-height: 1.35 !important;
+    box-sizing: border-box !important;
   }
 
   .btn-primary, .btn-secondary {
-    width: 100%;
-    justify-content: center;
+    width: 100% !important;
+    max-width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    min-height: 48px !important;
+  }
+
+  img, svg, iframe, video {
+    max-width: 100% !important;
   }
 }
 

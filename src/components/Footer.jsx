@@ -246,11 +246,11 @@ export default function Footer({ onOpenProjectModal }) {
           }}
         >
           <div>
-            © 2026 Web.BloomsCreates. All rights reserved.
+            © 2026 Web.BloomCreates. All rights reserved.
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: 'var(--sage-muted)', fontWeight: '500' }}>
-            Built with care by Web.BloomsCreates.
+            Built with care by Web.BloomCreates.
           </div>
         </div>
       </div>

@@ -19,6 +19,7 @@ export default function Hero({ onOpenProjectModal }) {
       {/* ========================================================================= */}
       <div
         aria-hidden="true"
+        className="hero-center-bg-watermark"
         style={{
           position: 'absolute',
           top: '50%',
@@ -183,7 +184,7 @@ export default function Hero({ onOpenProjectModal }) {
 
             {/* Quality Standards Highlights */}
             <div
-              className="animate-hero-5"
+              className="animate-hero-5 hero-features-list"
               style={{
                 display: 'flex',
                 flexWrap: 'wrap',
@@ -267,6 +268,7 @@ export default function Hero({ onOpenProjectModal }) {
 
             {/* LAPTOP CONTAINER FRAME */}
             <div
+              className="hero-laptop-frame"
               style={{
                 position: 'relative',
                 width: '94%',
@@ -698,24 +700,41 @@ export default function Hero({ onOpenProjectModal }) {
           }
         }
 
-        @media (max-width: 640px) {
+        @media (max-width: 768px) {
+          .hero-center-bg-watermark {
+            width: clamp(220px, 70vw, 320px) !important;
+            height: clamp(220px, 70vw, 320px) !important;
+            opacity: 0.08 !important;
+          }
           .hero-pill-top, .hero-pill-right {
             display: none !important;
           }
+          .hero-laptop-frame {
+            width: 100% !important;
+            max-width: 100% !important;
+          }
           .hero-mobile-frame {
-            width: 145px !important;
-            bottom: -20px !important;
-            right: -10px !important;
+            width: 130px !important;
+            bottom: -15px !important;
+            right: 0px !important;
           }
           .hero-cta-group {
             flex-direction: column !important;
             align-items: stretch !important;
             gap: 0.85rem !important;
+            width: 100% !important;
           }
           .hero-cta-group button, .hero-cta-group a {
             width: 100% !important;
             justify-content: center !important;
             text-align: center !important;
+            box-sizing: border-box !important;
+          }
+          .hero-features-list {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 0.75rem !important;
+            width: 100% !important;
           }
         }
       `}</style>

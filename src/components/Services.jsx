@@ -120,7 +120,7 @@ export default function Services({ onOpenProjectModal, onSelectPackage }) {
                   </span>
                   <span style={{ color: 'var(--forest)', fontSize: '0.75rem' }}>•</span>
                   <span style={{ fontSize: '0.76rem', fontWeight: '700', letterSpacing: '0.15em', color: 'var(--forest)', textTransform: 'uppercase' }}>
-                    WEB.BLOOMSCREATES
+                    WEB.BLOOMCREATES
                   </span>
                   <span style={{ color: 'var(--forest)', fontSize: '0.75rem' }}>•</span>
                 </React.Fragment>
@@ -651,7 +651,7 @@ export default function Services({ onOpenProjectModal, onSelectPackage }) {
                   </span>
                   <span style={{ color: 'var(--sage)', fontSize: '0.75rem' }}>•</span>
                   <span style={{ fontSize: '0.76rem', fontWeight: '700', letterSpacing: '0.15em', color: 'var(--forest)', textTransform: 'uppercase' }}>
-                    WEB.BLOOMSCREATES
+                    WEB.BLOOMCREATES
                   </span>
                   <span style={{ color: 'var(--sage)', fontSize: '0.75rem' }}>•</span>
                 </React.Fragment>
@@ -700,6 +700,14 @@ export default function Services({ onOpenProjectModal, onSelectPackage }) {
           }
           .services-expanded-rail-mobile {
             display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+          }
+          .services-marquee-wrapper {
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
           }
         }
 
