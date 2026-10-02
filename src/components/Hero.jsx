@@ -154,7 +154,7 @@ export default function Hero({ onOpenProjectModal }) {
 
             {/* CTAs */}
             <div
-              className="animate-hero-4"
+              className="animate-hero-4 hero-cta-group"
               style={{
                 display: 'flex',
                 flexWrap: 'wrap',
@@ -706,6 +706,16 @@ export default function Hero({ onOpenProjectModal }) {
             width: 145px !important;
             bottom: -20px !important;
             right: -10px !important;
+          }
+          .hero-cta-group {
+            flex-direction: column !important;
+            align-items: stretch !important;
+            gap: 0.85rem !important;
+          }
+          .hero-cta-group button, .hero-cta-group a {
+            width: 100% !important;
+            justify-content: center !important;
+            text-align: center !important;
           }
         }
       `}</style>

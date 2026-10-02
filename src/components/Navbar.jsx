@@ -207,6 +207,7 @@ export default function Navbar({ onOpenProjectModal }) {
         }
         @media (max-width: 959px) {
           .desktop-nav { display: none !important; }
+          .desktop-cta-btn { display: none !important; }
           .mobile-toggle-btn { display: flex !important; }
         }
       `}</style>

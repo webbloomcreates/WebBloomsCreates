@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
-import { ArrowUpRight, Globe, Sparkles, ExternalLink, ShieldCheck, ArrowRight, Layers, Eye, Play, Pause } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { ArrowUpRight, Globe, Sparkles, ExternalLink, ShieldCheck, ArrowRight, ArrowLeft, Layers, Eye, ChevronLeft, ChevronRight } from 'lucide-react';
 import { portfolioData } from '../data/studioData';
 import ProjectPreviewModal from './ProjectPreviewModal';
 import ScrollReveal from './ScrollReveal';
 
 export default function Portfolio({ onOpenProjectModal }) {
   const [selectedProject, setSelectedProject] = useState(null);
-  const [isMarqueePaused, setIsMarqueePaused] = useState(false);
+  const scrollContainerRef = useRef(null);
 
-  // Duplicate list for infinite smooth marquee reel
-  const marqueeList = [...portfolioData, ...portfolioData];
+  // Scroll Track Controls (Left / Right Buttons)
+  const handleScroll = (direction) => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = direction === 'left' ? -380 : 380;
+      scrollContainerRef.current.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <section
@@ -26,376 +34,365 @@ export default function Portfolio({ onOpenProjectModal }) {
       <div className="container">
         {/* Section Header */}
         <ScrollReveal>
-          <div className="section-header" style={{ marginBottom: '3rem' }}>
-            <span className="subheading">SELECTED STUDIO WORK</span>
-            <h2 className="heading" style={{ fontSize: 'clamp(2.4rem, 4.5vw, 3.8rem)' }}>
-              Websites designed to make your business look extraordinary.
-            </h2>
-            <p className="description" style={{ maxWidth: '680px' }}>
-              We don't do generic templates. Every website below is a bespoke digital experience, custom designed and coded to establish instant trust and drive client inquiries.
-            </p>
-          </div>
-        </ScrollReveal>
-
-        {/* --- ANIMATED MOVING CARDS MARQUEE REEL --- */}
-        <ScrollReveal delay={0.1}>
           <div
             style={{
-              position: 'relative',
-              marginBottom: '4rem',
-              marginTop: '1rem'
+              display: 'flex',
+              flexWrap: 'wrap',
+              alignItems: 'flex-end',
+              justifyContent: 'space-between',
+              gap: '2rem',
+              marginBottom: '2.5rem'
             }}
           >
-            {/* Reel Header Label & Pause Control */}
+            <div style={{ maxWidth: '680px' }}>
+              <span className="subheading">OUR FEATURED WORK</span>
+              <h2 className="heading" style={{ fontSize: 'clamp(2.2rem, 4.2vw, 3.6rem)', marginBottom: '1rem' }}>
+                Websites designed to make your business look extraordinary.
+              </h2>
+              <p className="description" style={{ margin: 0 }}>
+                Explore our recent live client builds. Every website is custom-designed from scratch for maximum brand appeal, lighting speed, and client conversion.
+              </p>
+            </div>
+
+            {/* Manual Slider Navigation Arrows */}
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'space-between',
-                marginBottom: '1.25rem',
-                padding: '0 0.5rem'
+                gap: '0.75rem'
               }}
+              className="portfolio-slider-controls"
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-                <span
-                  style={{
-                    width: '8px',
-                    height: '8px',
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--sage)',
-                    display: 'inline-block',
-                    animation: 'pulseGlow 2s infinite'
-                  }}
-                />
-                <span
-                  style={{
-                    fontSize: '0.78rem',
-                    fontWeight: '700',
-                    letterSpacing: '0.12em',
-                    textTransform: 'uppercase',
-                    color: 'var(--forest)'
-                  }}
-                >
-                  LIVE SHOWCASE REEL • ANIMATED CARDS (HOVER TO PAUSE & INSPECT)
-                </span>
-              </div>
+              <button
+                onClick={() => handleScroll('left')}
+                aria-label="Previous Project"
+                style={{
+                  width: '46px',
+                  height: '46px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--bg-primary)',
+                  border: '1px solid var(--border-medium)',
+                  color: 'var(--forest)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  transition: 'all 0.25s ease',
+                  boxShadow: 'var(--shadow-sm)'
+                }}
+                className="portfolio-nav-btn"
+              >
+                <ChevronLeft size={22} />
+              </button>
 
               <button
-                onClick={() => setIsMarqueePaused(!isMarqueePaused)}
+                onClick={() => handleScroll('right')}
+                aria-label="Next Project"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
-                  fontSize: '0.76rem',
-                  fontWeight: '700',
-                  color: 'var(--forest)',
-                  backgroundColor: 'var(--bg-secondary)',
-                  border: '1px solid var(--border-medium)',
-                  padding: '0.35rem 0.85rem',
-                  borderRadius: 'var(--radius-pill)',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease'
-                }}
-              >
-                {isMarqueePaused ? <Play size={12} /> : <Pause size={12} />}
-                {isMarqueePaused ? 'Resume Motion' : 'Pause Motion'}
-              </button>
-            </div>
-
-            {/* Marquee Track Container */}
-            <div
-              className="portfolio-marquee-wrapper"
-              onMouseEnter={() => setIsMarqueePaused(true)}
-              onMouseLeave={() => setIsMarqueePaused(false)}
-              style={{
-                overflow: 'hidden',
-                position: 'relative',
-                borderRadius: 'var(--radius-lg)',
-                border: '1px solid var(--border-medium)',
-                backgroundColor: 'var(--bg-primary)',
-                padding: '1.75rem 0',
-                boxShadow: 'var(--shadow-md)'
-              }}
-            >
-              {/* Fade Edges Masks */}
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  bottom: 0,
-                  left: 0,
-                  width: '80px',
-                  background: 'linear-gradient(90deg, var(--bg-primary) 0%, transparent 100%)',
-                  zIndex: 3,
-                  pointerEvents: 'none'
-                }}
-              />
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  bottom: 0,
-                  right: 0,
-                  width: '80px',
-                  background: 'linear-gradient(-90deg, var(--bg-primary) 0%, transparent 100%)',
-                  zIndex: 3,
-                  pointerEvents: 'none'
-                }}
-              />
-
-              <div
-                className={`portfolio-marquee-track ${isMarqueePaused ? 'paused-track' : ''}`}
-                style={{
+                  width: '46px',
+                  height: '46px',
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--forest)',
+                  border: '1px solid var(--forest)',
+                  color: '#ffffff',
                   display: 'flex',
-                  gap: '1.5rem',
-                  width: 'max-content',
-                  animation: 'portfolioMarquee 42s linear infinite',
-                  animationPlayState: isMarqueePaused ? 'paused' : 'running',
-                  willChange: 'transform'
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  transition: 'all 0.25s ease',
+                  boxShadow: 'var(--shadow-md)'
                 }}
+                className="portfolio-nav-btn"
               >
-                {marqueeList.map((project, itemIdx) => {
-                  const getImageUrl = (imgPath) => {
-                    if (!imgPath) return null;
-                    if (imgPath.startsWith('http')) return imgPath;
-                    const cleanPath = imgPath.replace(/^\.?\//, '');
-                    return `${import.meta.env.BASE_URL}${cleanPath}`;
-                  };
-
-                  const imageSrc = getImageUrl(project.image);
-
-                  const handleCardClick = () => {
-                    if (project.liveUrl) {
-                      window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
-                    } else {
-                      setSelectedProject(project);
-                    }
-                  };
-
-                  return (
-                    <div
-                      key={`${project.id}-${itemIdx}`}
-                      onClick={handleCardClick}
-                      className="moving-card-item"
-                      style={{
-                        width: '340px',
-                        flexShrink: 0,
-                        backgroundColor: 'var(--bg-secondary)',
-                        borderRadius: 'var(--radius-md)',
-                        border: '1px solid var(--border-medium)',
-                        overflow: 'hidden',
-                        boxShadow: 'var(--shadow-sm)',
-                        cursor: 'pointer',
-                        transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'space-between'
-                      }}
-                    >
-                      {/* Top Preview: Screenshot Frame or Gradient Banner */}
-                      {imageSrc ? (
-                        <div
-                          style={{
-                            height: '180px',
-                            backgroundColor: 'var(--bg-primary)',
-                            position: 'relative',
-                            overflow: 'hidden',
-                            borderBottom: '1px solid var(--border-subtle)',
-                            display: 'flex',
-                            flexDirection: 'column'
-                          }}
-                        >
-                          {/* Mini Browser Bar */}
-                          <div
-                            style={{
-                              backgroundColor: 'var(--bg-card)',
-                              padding: '0.45rem 0.75rem',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'space-between',
-                              borderBottom: '1px solid var(--border-subtle)',
-                              position: 'relative',
-                              zIndex: 2
-                            }}
-                          >
-                            <div style={{ display: 'flex', gap: '0.3rem' }}>
-                              <div style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#E06C75' }} />
-                              <div style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#E5C07B' }} />
-                              <div style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#98C379' }} />
-                            </div>
-                            <span
-                              style={{
-                                fontSize: '0.66rem',
-                                color: 'var(--charcoal-muted)',
-                                fontFamily: 'monospace',
-                                textOverflow: 'ellipsis',
-                                overflow: 'hidden',
-                                whiteSpace: 'nowrap',
-                                maxWidth: '170px'
-                              }}
-                            >
-                              {project.liveUrl ? project.liveUrl.replace(/^https?:\/\//, '') : project.name}
-                            </span>
-                            <span
-                              style={{
-                                fontSize: '0.65rem',
-                                fontWeight: '700',
-                                backgroundColor: 'var(--sage-tint)',
-                                color: 'var(--forest)',
-                                padding: '0.15rem 0.5rem',
-                                borderRadius: 'var(--radius-pill)'
-                              }}
-                            >
-                              LIVE ↗
-                            </span>
-                          </div>
-
-                          {/* Screenshot Image Container */}
-                          <div style={{ flexGrow: 1, overflow: 'hidden', position: 'relative' }}>
-                            <img
-                              src={imageSrc}
-                              alt={project.name}
-                              style={{
-                                width: '100%',
-                                height: '100%',
-                                objectFit: 'cover',
-                                objectPosition: 'top',
-                                transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
-                              }}
-                              className="card-img-hover"
-                            />
-                          </div>
-                        </div>
-                      ) : (
-                        <div
-                          style={{
-                            height: '160px',
-                            background: project.imageBg,
-                            padding: '1rem',
-                            position: 'relative',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'space-between'
-                          }}
-                        >
-                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <span
-                              style={{
-                                fontSize: '0.68rem',
-                                fontWeight: '700',
-                                backgroundColor: 'rgba(255, 255, 255, 0.22)',
-                                backdropFilter: 'blur(6px)',
-                                color: '#ffffff',
-                                padding: '0.2rem 0.65rem',
-                                borderRadius: 'var(--radius-pill)',
-                                textTransform: 'uppercase'
-                              }}
-                            >
-                              {project.categoryKey}
-                            </span>
-
-                            <span
-                              style={{
-                                width: '28px',
-                                height: '28px',
-                                borderRadius: '50%',
-                                backgroundColor: 'rgba(255,255,255,0.9)',
-                                color: 'var(--forest)',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
-                              }}
-                            >
-                              <Eye size={14} />
-                            </span>
-                          </div>
-
-                          <div style={{ color: '#ffffff', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>
-                            <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: '#ffffff', lineHeight: '1.2' }}>
-                              {project.name}
-                            </h4>
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Bottom Details */}
-                      <div style={{ padding: '1.1rem 1.15rem 1.15rem 1.15rem' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
-                          <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: 'var(--forest)', fontWeight: '700', lineHeight: '1.2' }}>
-                            {project.name}
-                          </h4>
-                        </div>
-
-                        <p style={{ fontSize: '0.84rem', color: 'var(--charcoal-light)', lineHeight: '1.45', marginBottom: '1rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                          {project.tagline}
-                        </p>
-
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--border-subtle)', paddingTop: '0.75rem', gap: '0.5rem' }}>
-                          {project.liveUrl ? (
-                            <a
-                              href={project.liveUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
-                              }}
-                              className="btn-primary"
-                              style={{
-                                padding: '0.42rem 0.9rem',
-                                fontSize: '0.78rem',
-                                borderRadius: 'var(--radius-pill)',
-                                textDecoration: 'none',
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: '0.3rem'
-                              }}
-                            >
-                              Visit Website <ExternalLink size={12} />
-                            </a>
-                          ) : (
-                            <span style={{ fontSize: '0.76rem', fontWeight: '600', color: 'var(--sage)' }}>
-                              {project.client}
-                            </span>
-                          )}
-
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setSelectedProject(project);
-                            }}
-                            className="btn-secondary"
-                            style={{
-                              padding: '0.42rem 0.9rem',
-                              fontSize: '0.78rem',
-                              borderRadius: 'var(--radius-pill)',
-                              display: 'inline-flex',
-                              alignItems: 'center',
-                              gap: '0.3rem'
-                            }}
-                          >
-                            Quick View <Eye size={12} />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+                <ChevronRight size={22} />
+              </button>
             </div>
           </div>
         </ScrollReveal>
 
-        {/* Editorial Footer Quote Callout */}
+        {/* --- INTERACTIVE SCROLLABLE CARDS CONTAINER --- */}
+        <ScrollReveal delay={0.1}>
+          <div
+            style={{
+              position: 'relative',
+              marginBottom: '3.5rem'
+            }}
+          >
+            {/* Scrollable Track */}
+            <div
+              ref={scrollContainerRef}
+              className="portfolio-scroll-container"
+              style={{
+                display: 'flex',
+                gap: '1.5rem',
+                overflowX: 'auto',
+                scrollSnapType: 'x mandatory',
+                scrollBehavior: 'smooth',
+                WebkitOverflowScrolling: 'touch',
+                padding: '0.75rem 0.25rem 1.75rem 0.25rem',
+                scrollbarWidth: 'thin',
+                scrollbarColor: 'var(--sage) var(--bg-secondary)'
+              }}
+            >
+              {portfolioData.map((project) => {
+                const getImageUrl = (imgPath) => {
+                  if (!imgPath) return null;
+                  if (imgPath.startsWith('http')) return imgPath;
+                  const cleanPath = imgPath.replace(/^\.?\//, '');
+                  return `${import.meta.env.BASE_URL}${cleanPath}`;
+                };
+
+                const imageSrc = getImageUrl(project.image);
+
+                const handleCardClick = () => {
+                  if (project.liveUrl) {
+                    window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
+                  } else {
+                    setSelectedProject(project);
+                  }
+                };
+
+                return (
+                  <div
+                    key={project.id}
+                    onClick={handleCardClick}
+                    className="portfolio-hover-card"
+                    style={{
+                      width: 'clamp(290px, 85vw, 360px)',
+                      flexShrink: 0,
+                      scrollSnapAlign: 'start',
+                      backgroundColor: 'var(--bg-secondary)',
+                      borderRadius: 'var(--radius-md)',
+                      border: '1px solid var(--border-medium)',
+                      overflow: 'hidden',
+                      boxShadow: 'var(--shadow-sm)',
+                      cursor: 'pointer',
+                      transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'space-between'
+                    }}
+                  >
+                    {/* Top Preview Image & Header */}
+                    {imageSrc ? (
+                      <div
+                        style={{
+                          height: '210px',
+                          backgroundColor: 'var(--bg-primary)',
+                          position: 'relative',
+                          overflow: 'hidden',
+                          borderBottom: '1px solid var(--border-subtle)',
+                          display: 'flex',
+                          flexDirection: 'column'
+                        }}
+                      >
+                        {/* Mini Browser Header */}
+                        <div
+                          style={{
+                            backgroundColor: 'var(--bg-card)',
+                            padding: '0.5rem 0.85rem',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            borderBottom: '1px solid var(--border-subtle)',
+                            position: 'relative',
+                            zIndex: 2
+                          }}
+                        >
+                          <div style={{ display: 'flex', gap: '0.3rem' }}>
+                            <div style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#E06C75' }} />
+                            <div style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#E5C07B' }} />
+                            <div style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#98C379' }} />
+                          </div>
+                          <span
+                            style={{
+                              fontSize: '0.68rem',
+                              color: 'var(--charcoal-muted)',
+                              fontFamily: 'monospace',
+                              textOverflow: 'ellipsis',
+                              overflow: 'hidden',
+                              whiteSpace: 'nowrap',
+                              maxWidth: '180px'
+                            }}
+                          >
+                            {project.liveUrl ? project.liveUrl.replace(/^https?:\/\//, '') : project.name}
+                          </span>
+                          <span
+                            style={{
+                              fontSize: '0.65rem',
+                              fontWeight: '700',
+                              backgroundColor: 'var(--sage-tint)',
+                              color: 'var(--forest)',
+                              padding: '0.15rem 0.5rem',
+                              borderRadius: 'var(--radius-pill)'
+                            }}
+                          >
+                            LIVE ↗
+                          </span>
+                        </div>
+
+                        {/* Screenshot Image Frame */}
+                        <div style={{ flexGrow: 1, overflow: 'hidden', position: 'relative' }}>
+                          <img
+                            src={imageSrc}
+                            alt={project.name}
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'cover',
+                              objectPosition: 'top',
+                              transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
+                            }}
+                            className="card-img-zoom"
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div
+                        style={{
+                          height: '190px',
+                          background: project.imageBg,
+                          padding: '1.25rem',
+                          position: 'relative',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          justifyContent: 'space-between'
+                        }}
+                      >
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span
+                            style={{
+                              fontSize: '0.68rem',
+                              fontWeight: '700',
+                              backgroundColor: 'rgba(255, 255, 255, 0.22)',
+                              backdropFilter: 'blur(6px)',
+                              color: '#ffffff',
+                              padding: '0.25rem 0.75rem',
+                              borderRadius: 'var(--radius-pill)',
+                              textTransform: 'uppercase'
+                            }}
+                          >
+                            {project.categoryKey}
+                          </span>
+
+                          <span
+                            style={{
+                              width: '30px',
+                              height: '30px',
+                              borderRadius: '50%',
+                              backgroundColor: 'rgba(255,255,255,0.9)',
+                              color: 'var(--forest)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+                            }}
+                          >
+                            <Eye size={15} />
+                          </span>
+                        </div>
+
+                        <div style={{ color: '#ffffff', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>
+                          <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', color: '#ffffff', lineHeight: '1.2' }}>
+                            {project.name}
+                          </h4>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Bottom Details Card Body */}
+                    <div style={{ padding: '1.25rem 1.25rem 1.25rem 1.25rem' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                        <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', color: 'var(--forest)', fontWeight: '700', lineHeight: '1.2' }}>
+                          {project.name}
+                        </h4>
+                      </div>
+
+                      <p style={{ fontSize: '0.86rem', color: 'var(--charcoal-light)', lineHeight: '1.5', marginBottom: '1.1rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                        {project.tagline}
+                      </p>
+
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--border-subtle)', paddingTop: '0.85rem', gap: '0.5rem' }}>
+                        {project.liveUrl ? (
+                          <a
+                            href={project.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
+                            }}
+                            className="btn-primary"
+                            style={{
+                              padding: '0.45rem 1rem',
+                              fontSize: '0.8rem',
+                              borderRadius: 'var(--radius-pill)',
+                              textDecoration: 'none',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '0.35rem'
+                            }}
+                          >
+                            Visit Website <ExternalLink size={13} />
+                          </a>
+                        ) : (
+                          <span style={{ fontSize: '0.78rem', fontWeight: '600', color: 'var(--sage)' }}>
+                            {project.client}
+                          </span>
+                        )}
+
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedProject(project);
+                          }}
+                          className="btn-secondary"
+                          style={{
+                            padding: '0.45rem 1rem',
+                            fontSize: '0.8rem',
+                            borderRadius: 'var(--radius-pill)',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.35rem'
+                          }}
+                        >
+                          Quick View <Eye size={13} />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Touch Swipe Hint for Mobile */}
+            <div
+              style={{
+                textAlign: 'center',
+                fontSize: '0.76rem',
+                color: 'var(--charcoal-muted)',
+                fontWeight: '500',
+                marginTop: '0.5rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.4rem'
+              }}
+            >
+              <span>← Swipe or scroll to view more projects →</span>
+            </div>
+          </div>
+        </ScrollReveal>
+
+        {/* Editorial Callout */}
         <ScrollReveal>
           <div
             style={{
               backgroundColor: 'var(--bg-primary)',
               borderRadius: 'var(--radius-lg)',
               border: '1px solid var(--border-medium)',
-              padding: 'clamp(2.5rem, 5vw, 4rem)',
+              padding: 'clamp(2.2rem, 5vw, 3.8rem)',
               textAlign: 'center',
               maxWidth: '840px',
               margin: '0 auto',
@@ -406,7 +403,7 @@ export default function Portfolio({ onOpenProjectModal }) {
             <h3
               style={{
                 fontFamily: 'var(--font-serif)',
-                fontSize: 'clamp(2rem, 3.8vw, 3rem)',
+                fontSize: 'clamp(1.85rem, 3.8vw, 2.8rem)',
                 color: 'var(--forest)',
                 marginBottom: '1rem',
                 lineHeight: '1.15'
@@ -416,12 +413,12 @@ export default function Portfolio({ onOpenProjectModal }) {
             </h3>
             <p
               style={{
-                fontSize: '1.08rem',
+                fontSize: '1rem',
                 color: 'var(--charcoal-light)',
                 marginBottom: '2rem',
                 maxWidth: '620px',
                 margin: '0 auto 2rem auto',
-                lineHeight: '1.65'
+                lineHeight: '1.6'
               }}
             >
               We take a limited number of client projects each month to ensure dedicated craftsmanship, rapid turnarounds, and exceptional client support.
@@ -430,9 +427,9 @@ export default function Portfolio({ onOpenProjectModal }) {
             <button
               onClick={() => onOpenProjectModal()}
               className="btn-primary"
-              style={{ padding: '1.05rem 2.2rem', fontSize: '1rem' }}
+              style={{ padding: '1rem 2.1rem', fontSize: '0.98rem' }}
             >
-              Start Your Website Build →
+              Start your website →
             </button>
           </div>
         </ScrollReveal>
@@ -447,50 +444,38 @@ export default function Portfolio({ onOpenProjectModal }) {
         />
       )}
 
-      {/* CSS Animations & Responsive Rules */}
+      {/* Hover & Responsive CSS */}
       <style>{`
-        @keyframes portfolioMarquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+        .portfolio-nav-btn:hover {
+          transform: scale(1.08);
+          opacity: 0.9;
         }
 
-        @keyframes pulseGlow {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.4; transform: scale(0.85); }
-        }
-
-        .moving-card-item:hover {
-          transform: translateY(-8px) scale(1.02);
+        .portfolio-hover-card:hover {
+          transform: translateY(-8px) scale(1.015);
           border-color: var(--forest) !important;
-          box-shadow: 0 20px 40px -10px rgba(23, 51, 34, 0.18) !important;
+          box-shadow: 0 22px 45px -10px rgba(23, 51, 34, 0.18) !important;
         }
 
-        @media (min-width: 960px) {
-          .portfolio-item-card {
-            grid-template-columns: 1.15fr 0.85fr !important;
-          }
+        .portfolio-hover-card:hover .card-img-zoom {
+          transform: scale(1.06);
         }
 
-        @media (hover: hover) {
-          .portfolio-item-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 24px 48px -12px rgba(23, 51, 34, 0.14) !important;
-            border-color: var(--forest) !important;
-          }
-          .portfolio-item-card:hover .mockup-frame-hover {
-            transform: scale(1.02);
-          }
-          .portfolio-item-card:hover .portfolio-title-text {
-            color: var(--forest-light) !important;
-          }
+        .portfolio-scroll-container::-webkit-scrollbar {
+          height: 6px;
+        }
+        .portfolio-scroll-container::-webkit-scrollbar-track {
+          background: var(--bg-secondary);
+          border-radius: 10px;
+        }
+        .portfolio-scroll-container::-webkit-scrollbar-thumb {
+          background: var(--sage);
+          border-radius: 10px;
         }
 
-        @media (prefers-reduced-motion: reduce) {
-          .portfolio-marquee-track {
-            animation: none !important;
-          }
-          .moving-card-item, .portfolio-item-card {
-            transition: none !important;
+        @media (max-width: 640px) {
+          .portfolio-slider-controls {
+            display: none !important;
           }
         }
       `}</style>
