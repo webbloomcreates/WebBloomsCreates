@@ -37,8 +37,9 @@ export default function Footer({ onOpenProjectModal }) {
       </svg>
 
       {/* MINIMAL & ELEGANT FOOTER CONTENT */}
-      <div className="container" style={{ paddingTop: '4.5rem', paddingBottom: '3.5rem', position: 'relative', zIndex: 1 }}>
+      <div className="container footer-content" style={{ paddingTop: '4.5rem', paddingBottom: '3.5rem', position: 'relative', zIndex: 1 }}>
         <div
+          className="footer-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
@@ -64,6 +65,7 @@ export default function Footer({ onOpenProjectModal }) {
                 <Leaf size={18} />
               </div>
               <span
+                className="footer-brand-title"
                 style={{
                   fontFamily: 'var(--font-serif)',
                   fontSize: '1.65rem',
@@ -233,6 +235,7 @@ export default function Footer({ onOpenProjectModal }) {
 
         {/* FOOTER BOTTOM BAR */}
         <div
+          className="footer-bottom-bar"
           style={{
             borderTop: '1px solid var(--border-dark)',
             paddingTop: '2rem',
@@ -254,6 +257,27 @@ export default function Footer({ onOpenProjectModal }) {
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .footer-content {
+            padding-top: 2.25rem !important;
+            padding-bottom: 2rem !important;
+          }
+          .footer-grid {
+            gap: 1.75rem !important;
+            margin-bottom: 2rem !important;
+          }
+          .footer-brand-title {
+            font-size: 1.35rem !important;
+          }
+          .footer-bottom-bar {
+            padding-top: 1.25rem !important;
+            font-size: 0.8rem !important;
+            gap: 0.5rem !important;
+          }
+        }
+      `}</style>
     </footer>
   );
 }

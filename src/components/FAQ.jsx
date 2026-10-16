@@ -38,6 +38,7 @@ export default function FAQ({ onOpenProjectModal }) {
 
         {/* Accordions List (10 Questions) */}
         <div
+          className="faq-list-container"
           style={{
             maxWidth: '840px',
             margin: '0 auto 4rem auto',
@@ -51,6 +52,7 @@ export default function FAQ({ onOpenProjectModal }) {
             return (
               <ScrollReveal key={idx} delay={idx * 0.05}>
                 <div
+                  className="faq-accordion-card"
                   style={{
                     backgroundColor: 'var(--bg-secondary)',
                     borderRadius: 'var(--radius-md)',
@@ -64,6 +66,7 @@ export default function FAQ({ onOpenProjectModal }) {
                   <button
                     onClick={() => toggleIndex(idx)}
                     aria-expanded={isOpen}
+                    className="faq-accordion-btn"
                     style={{
                       width: '100%',
                       padding: 'clamp(1rem, 3.2vw, 1.4rem) clamp(0.95rem, 3.2vw, 1.75rem)',
@@ -80,6 +83,7 @@ export default function FAQ({ onOpenProjectModal }) {
                     }}
                   >
                     <span
+                      className="faq-accordion-title"
                       style={{
                         fontFamily: 'var(--font-serif)',
                         fontSize: 'clamp(1.08rem, 2.8vw, 1.3rem)',
@@ -92,6 +96,7 @@ export default function FAQ({ onOpenProjectModal }) {
                     </span>
 
                     <div
+                      className="faq-toggle-icon"
                       style={{
                         width: '32px',
                         height: '32px',
@@ -119,6 +124,7 @@ export default function FAQ({ onOpenProjectModal }) {
                     }}
                   >
                     <div
+                      className="faq-answer-inner"
                       style={{
                         padding: '0 clamp(0.95rem, 3.2vw, 1.75rem) clamp(1.1rem, 3.2vw, 1.6rem) clamp(0.95rem, 3.2vw, 1.75rem)',
                         borderTop: '1px solid var(--border-subtle)',
@@ -139,6 +145,7 @@ export default function FAQ({ onOpenProjectModal }) {
         {/* FAQ Bottom Support Callout Box */}
         <ScrollReveal delay={0.2}>
           <div
+            className="faq-support-box"
             style={{
               textAlign: 'center',
               backgroundColor: 'var(--bg-primary)',
@@ -155,6 +162,7 @@ export default function FAQ({ onOpenProjectModal }) {
             }}
           >
             <div
+              className="faq-support-icon"
               style={{
                 width: '48px',
                 height: '48px',
@@ -170,10 +178,10 @@ export default function FAQ({ onOpenProjectModal }) {
             </div>
 
             <div>
-              <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--forest)', marginBottom: '0.4rem' }}>
+              <h4 className="faq-support-title" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: 'var(--forest)', marginBottom: '0.4rem' }}>
                 Have a specific question about your project?
               </h4>
-              <p style={{ fontSize: '0.96rem', color: 'var(--charcoal-muted)' }}>
+              <p className="faq-support-desc" style={{ fontSize: '0.96rem', color: 'var(--charcoal-muted)' }}>
                 Message us on Instagram{' '}
                 <a
                   href={studioInfo.instagramUrl}
@@ -189,7 +197,7 @@ export default function FAQ({ onOpenProjectModal }) {
 
             <button
               onClick={() => onOpenProjectModal()}
-              className="btn-primary"
+              className="btn-primary faq-support-btn"
               style={{ padding: '0.85rem 1.8rem', fontSize: '0.92rem' }}
             >
               Ask a Question →
@@ -197,6 +205,61 @@ export default function FAQ({ onOpenProjectModal }) {
           </div>
         </ScrollReveal>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          #faq .section-header {
+            margin-bottom: 1.5rem !important;
+          }
+          .faq-list-container {
+            margin-bottom: 1.5rem !important;
+            gap: 0.65rem !important;
+          }
+          .faq-accordion-btn {
+            padding: 0.8rem 0.95rem !important;
+            gap: 0.5rem !important;
+          }
+          .faq-accordion-title {
+            font-size: 0.98rem !important;
+            line-height: 1.35 !important;
+          }
+          .faq-toggle-icon {
+            width: 28px !important;
+            height: 28px !important;
+          }
+          .faq-toggle-icon svg {
+            width: 15px !important;
+            height: 15px !important;
+          }
+          .faq-answer-inner {
+            padding: 0 0.95rem 0.8rem 0.95rem !important;
+            font-size: 0.84rem !important;
+            line-height: 1.5 !important;
+          }
+          .faq-support-box {
+            padding: 1.35rem 1rem !important;
+            gap: 0.75rem !important;
+          }
+          .faq-support-icon {
+            width: 38px !important;
+            height: 38px !important;
+          }
+          .faq-support-title {
+            font-size: 1.18rem !important;
+            margin-bottom: 0.35rem !important;
+            line-height: 1.25 !important;
+          }
+          .faq-support-desc {
+            font-size: 0.84rem !important;
+            line-height: 1.5 !important;
+          }
+          .faq-support-btn {
+            padding: 0.75rem 1.4rem !important;
+            font-size: 0.86rem !important;
+            width: 100% !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

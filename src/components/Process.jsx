@@ -198,26 +198,26 @@ export default function Process() {
             className="mobile-timeline-line"
             style={{
               position: 'absolute',
-              top: '20px',
-              bottom: '20px',
-              left: '21px',
+              top: '18px',
+              bottom: '18px',
+              left: '17px',
               width: '2px',
               backgroundColor: 'var(--sage)',
               zIndex: 0
             }}
           />
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem', position: 'relative', zIndex: 1 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', position: 'relative', zIndex: 1 }}>
             {processSteps.map((stepItem, idx) => {
               const IconComp = iconMap[stepItem.icon] || Compass;
               return (
                 <ScrollReveal key={stepItem.step} delay={idx * 0.1}>
-                  <div style={{ display: 'flex', gap: 'clamp(0.75rem, 3vw, 1.25rem)', alignItems: 'flex-start' }}>
+                  <div style={{ display: 'flex', gap: 'clamp(0.65rem, 2.5vw, 1rem)', alignItems: 'flex-start' }}>
                     {/* Vertical Node Circle */}
                     <div
                       style={{
-                        width: '42px',
-                        height: '42px',
+                        width: '36px',
+                        height: '36px',
                         borderRadius: '50%',
                         backgroundColor: 'var(--forest)',
                         color: '#ffffff',
@@ -229,7 +229,7 @@ export default function Process() {
                         boxShadow: 'var(--shadow-sm)'
                       }}
                     >
-                      <IconComp size={18} />
+                      <IconComp size={16} />
                     </div>
 
                     {/* Mobile Card Content */}
@@ -238,36 +238,36 @@ export default function Process() {
                         backgroundColor: 'var(--bg-secondary)',
                         borderRadius: 'var(--radius-md)',
                         border: '1px solid var(--border-medium)',
-                        padding: 'clamp(1rem, 3.5vw, 1.5rem)',
+                        padding: '0.85rem 1rem',
                         flexGrow: 1,
                         minWidth: 0,
                         boxShadow: 'var(--shadow-sm)'
                       }}
                     >
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-                        <span style={{ fontSize: '0.72rem', fontWeight: '700', color: 'var(--sage)' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.25rem' }}>
+                        <span style={{ fontSize: '0.7rem', fontWeight: '700', color: 'var(--sage)' }}>
                           STEP {stepItem.step}
                         </span>
                       </div>
 
-                      <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.6rem', color: 'var(--forest)', marginBottom: '0.4rem' }}>
+                      <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.18rem', color: 'var(--forest)', marginBottom: '0.3rem', lineHeight: '1.25' }}>
                         {stepItem.name}
                       </h3>
 
-                      <p style={{ fontSize: '0.94rem', color: 'var(--charcoal-light)', lineHeight: '1.5', marginBottom: '1rem' }}>
+                      <p style={{ fontSize: '0.84rem', color: 'var(--charcoal-light)', lineHeight: '1.45', marginBottom: '0.75rem' }}>
                         "{stepItem.description}"
                       </p>
 
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
                         {(stepItem.details || []).map((detail, dIdx) => (
                           <span
                             key={dIdx}
                             style={{
-                              fontSize: '0.75rem',
+                              fontSize: '0.72rem',
                               color: 'var(--forest)',
                               fontWeight: '600',
                               backgroundColor: 'var(--sage-tint)',
-                              padding: '0.2rem 0.6rem',
+                              padding: '0.15rem 0.55rem',
                               borderRadius: 'var(--radius-pill)'
                             }}
                           >
@@ -289,6 +289,7 @@ export default function Process() {
         @media (max-width: 899px) {
           .desktop-timeline-wrapper { display: none !important; }
           .mobile-timeline-wrapper { display: block !important; }
+          #process .section-header { margin-bottom: 1.5rem !important; }
         }
         .timeline-card-inner:hover {
           transform: translateY(-4px);

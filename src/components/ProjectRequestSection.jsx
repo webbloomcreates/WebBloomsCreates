@@ -278,7 +278,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
       <div className="container" style={{ maxWidth: '1180px' }}>
         {/* Section Header Label */}
         <ScrollReveal>
-          <div style={{ marginBottom: '2.5rem' }}>
+          <div className="project-header-label" style={{ marginBottom: '2.5rem' }}>
             <span className="subheading">START YOUR WEBSITE</span>
           </div>
         </ScrollReveal>
@@ -297,7 +297,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
           <ScrollReveal delay={0.1}>
             <div>
               <h2
-                className="heading"
+                className="heading project-hero-heading"
                 style={{
                   fontSize: 'clamp(2.5rem, 4.8vw, 4rem)',
                   lineHeight: '1.08',
@@ -312,6 +312,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
               </h2>
 
               <p
+                className="project-hero-desc"
                 style={{
                   fontSize: '1.1rem',
                   color: 'var(--charcoal-light)',
@@ -325,6 +326,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
 
               {/* Direct Contact Card */}
               <div
+                className="project-contact-card"
                 style={{
                   backgroundColor: 'var(--bg-secondary)',
                   borderRadius: 'var(--radius-lg)',
@@ -335,6 +337,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
                 }}
               >
                 <h3
+                  className="project-contact-title"
                   style={{
                     fontFamily: 'var(--font-serif)',
                     fontSize: '1.4rem',
@@ -345,7 +348,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
                   Let's talk about your project.
                 </h3>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '1.5rem' }}>
+                <div className="project-contact-links" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginBottom: '1.5rem' }}>
                   {/* Instagram Direct Link */}
                   <a
                     href={studioInfo.instagramUrl}
@@ -1086,6 +1089,55 @@ export default function ProjectRequestSection({ preselectedPackage }) {
         @media (max-width: 860px) {
           .project-request-grid {
             grid-template-columns: 1fr !important;
+            gap: 1.75rem !important;
+          }
+          .project-header-label {
+            margin-bottom: 1.25rem !important;
+          }
+          .project-hero-heading {
+            font-size: clamp(1.75rem, 6.5vw, 2.2rem) !important;
+            margin-bottom: 0.75rem !important;
+            line-height: 1.15 !important;
+          }
+          .project-hero-desc {
+            font-size: 0.88rem !important;
+            margin-bottom: 1.5rem !important;
+            line-height: 1.55 !important;
+          }
+          .project-contact-card {
+            padding: 1.15rem 1rem !important;
+            margin-bottom: 1.5rem !important;
+          }
+          .project-contact-title {
+            font-size: 1.18rem !important;
+            margin-bottom: 0.85rem !important;
+          }
+          .project-contact-links {
+            gap: 0.75rem !important;
+            margin-bottom: 1rem !important;
+          }
+          .project-contact-links a {
+            padding: 0.65rem 0.85rem !important;
+          }
+          .project-form-card {
+            padding: 1.15rem 1rem !important;
+          }
+          .project-form-card form > div {
+            margin-bottom: 1.15rem !important;
+          }
+          .project-form-card label {
+            font-size: 0.8rem !important;
+            margin-bottom: 0.35rem !important;
+          }
+          .project-form-card input,
+          .project-form-card select,
+          .project-form-card textarea {
+            padding: 0.65rem 0.85rem !important;
+            font-size: 0.88rem !important;
+          }
+          .project-form-card button[type="submit"] {
+            padding: 0.85rem 1rem !important;
+            font-size: 0.95rem !important;
           }
         }
       `}</style>

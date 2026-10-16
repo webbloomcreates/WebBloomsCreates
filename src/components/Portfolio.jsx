@@ -35,6 +35,7 @@ export default function Portfolio({ onOpenProjectModal }) {
         {/* Section Header */}
         <ScrollReveal>
           <div
+            className="portfolio-header-wrap"
             style={{
               display: 'flex',
               flexWrap: 'wrap',
@@ -176,6 +177,7 @@ export default function Portfolio({ onOpenProjectModal }) {
                     {/* Top Preview Image & Header */}
                     {imageSrc ? (
                       <div
+                        className="portfolio-preview-frame"
                         style={{
                           height: '210px',
                           backgroundColor: 'var(--bg-primary)',
@@ -249,6 +251,7 @@ export default function Portfolio({ onOpenProjectModal }) {
                       </div>
                     ) : (
                       <div
+                        className="portfolio-preview-frame"
                         style={{
                           height: '190px',
                           background: project.imageBg,
@@ -301,14 +304,14 @@ export default function Portfolio({ onOpenProjectModal }) {
                     )}
 
                     {/* Bottom Details Card Body */}
-                    <div style={{ padding: '1.25rem 1.25rem 1.25rem 1.25rem' }}>
+                    <div className="portfolio-card-body" style={{ padding: '1.25rem 1.25rem 1.25rem 1.25rem' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
-                        <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', color: 'var(--forest)', fontWeight: '700', lineHeight: '1.2' }}>
+                        <h4 className="portfolio-card-title" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.35rem', color: 'var(--forest)', fontWeight: '700', lineHeight: '1.2' }}>
                           {project.name}
                         </h4>
                       </div>
 
-                      <p style={{ fontSize: '0.86rem', color: 'var(--charcoal-light)', lineHeight: '1.5', marginBottom: '1.1rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                      <p className="portfolio-card-desc" style={{ fontSize: '0.86rem', color: 'var(--charcoal-light)', lineHeight: '1.5', marginBottom: '1.1rem', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                         {project.tagline}
                       </p>
 
@@ -388,6 +391,7 @@ export default function Portfolio({ onOpenProjectModal }) {
         {/* Editorial Callout */}
         <ScrollReveal>
           <div
+            className="portfolio-editorial-callout"
             style={{
               backgroundColor: 'var(--bg-primary)',
               borderRadius: 'var(--radius-lg)',
@@ -401,6 +405,7 @@ export default function Portfolio({ onOpenProjectModal }) {
           >
             <span className="subheading" style={{ color: 'var(--sage)' }}>FUTURE-PROOF DIGITAL PRESENCE</span>
             <h3
+              className="portfolio-callout-title"
               style={{
                 fontFamily: 'var(--font-serif)',
                 fontSize: 'clamp(1.85rem, 3.8vw, 2.8rem)',
@@ -412,6 +417,7 @@ export default function Portfolio({ onOpenProjectModal }) {
               Ready to give your business a signature website experience?
             </h3>
             <p
+              className="portfolio-callout-desc"
               style={{
                 fontSize: '1rem',
                 color: 'var(--charcoal-light)',
@@ -426,7 +432,7 @@ export default function Portfolio({ onOpenProjectModal }) {
 
             <button
               onClick={() => onOpenProjectModal()}
-              className="btn-primary"
+              className="btn-primary portfolio-callout-btn"
               style={{ padding: '1rem 2.1rem', fontSize: '0.98rem' }}
             >
               Start your website →
@@ -474,21 +480,65 @@ export default function Portfolio({ onOpenProjectModal }) {
         }
 
         @media (max-width: 640px) {
+          .portfolio-header-wrap {
+            margin-bottom: 1.25rem !important;
+            gap: 1rem !important;
+          }
           .portfolio-slider-controls {
             display: none !important;
           }
           .portfolio-scroll-container {
             padding-left: 0.25rem !important;
             padding-right: 0.25rem !important;
-            gap: 1rem !important;
+            padding-bottom: 0.85rem !important;
+            margin-bottom: 1.5rem !important;
+            gap: 0.85rem !important;
             width: 100% !important;
             max-width: 100% !important;
             box-sizing: border-box !important;
           }
           .portfolio-hover-card {
-            width: clamp(260px, 82vw, 320px) !important;
-            max-width: 320px !important;
+            width: clamp(235px, 76vw, 280px) !important;
+            max-width: 280px !important;
             box-sizing: border-box !important;
+          }
+          .portfolio-preview-frame {
+            height: 140px !important;
+          }
+          .portfolio-card-body {
+            padding: 0.85rem 0.9rem !important;
+          }
+          .portfolio-card-title {
+            font-size: 1.12rem !important;
+          }
+          .portfolio-card-desc {
+            font-size: 0.8rem !important;
+            line-height: 1.45 !important;
+            margin-bottom: 0.75rem !important;
+          }
+          .portfolio-card-body .btn-primary,
+          .portfolio-card-body .btn-secondary {
+            padding: 0.38rem 0.75rem !important;
+            font-size: 0.74rem !important;
+          }
+          .portfolio-editorial-callout {
+            padding: 1.4rem 1.1rem !important;
+            margin-top: 0.5rem !important;
+          }
+          .portfolio-callout-title {
+            font-size: 1.3rem !important;
+            line-height: 1.25 !important;
+            margin-bottom: 0.65rem !important;
+          }
+          .portfolio-callout-desc {
+            font-size: 0.84rem !important;
+            line-height: 1.55 !important;
+            margin-bottom: 1.15rem !important;
+          }
+          .portfolio-callout-btn {
+            padding: 0.75rem 1.4rem !important;
+            font-size: 0.88rem !important;
+            width: 100% !important;
           }
         }
       `}</style>

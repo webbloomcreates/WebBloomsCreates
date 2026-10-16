@@ -351,14 +351,31 @@ textarea:focus {
   }
 
   .section-padding {
-    padding-top: clamp(2.5rem, 8vw, 4rem) !important;
-    padding-bottom: clamp(2.5rem, 8vw, 4rem) !important;
+    padding-top: clamp(1.75rem, 5vw, 2.75rem) !important;
+    padding-bottom: clamp(1.75rem, 5vw, 2.75rem) !important;
   }
 
   .section-header {
-    margin-bottom: 2rem !important;
+    margin-bottom: 1.5rem !important;
     padding-left: 0.25rem !important;
     padding-right: 0.25rem !important;
+  }
+
+  .section-header .heading {
+    font-size: clamp(1.65rem, 5.5vw, 2.1rem) !important;
+    margin-bottom: 0.55rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .section-header .subheading {
+    font-size: 0.72rem !important;
+    margin-bottom: 0.4rem !important;
+    letter-spacing: 0.1em !important;
+  }
+
+  .section-header .description {
+    font-size: 0.88rem !important;
+    line-height: 1.55 !important;
   }
 
   .badge-tag {

@@ -701,8 +701,12 @@ export default function Hero({ onOpenProjectModal }) {
         }
 
         @media (max-width: 768px) {
+          #home {
+            padding-top: 2.25rem !important;
+            padding-bottom: 2rem !important;
+          }
           .hero-grid {
-            gap: 2rem !important;
+            gap: 1.75rem !important;
           }
           .hero-center-bg-watermark {
             width: clamp(200px, 65vw, 300px) !important;

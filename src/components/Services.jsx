@@ -74,7 +74,7 @@ export default function Services({ onOpenProjectModal, onSelectPackage }) {
         {/* Moving Text Marquee Strip #1 (Left-to-Right) */}
         <ScrollReveal delay={0.1}>
           <div
-            className="services-marquee-wrapper"
+            className="services-marquee-wrapper services-marquee-top"
             style={{
               overflow: 'hidden',
               whiteSpace: 'nowrap',
@@ -466,6 +466,7 @@ export default function Services({ onOpenProjectModal, onSelectPackage }) {
             return (
               <div
                 key={service.id}
+                className="service-mobile-card"
                 onClick={() => setHoveredId(isExpanded ? null : service.id)}
                 style={{
                   backgroundColor: 'var(--bg-primary)',
@@ -479,6 +480,7 @@ export default function Services({ onOpenProjectModal, onSelectPackage }) {
               >
                 {/* Mobile Header Bar */}
                 <div
+                  className="service-mobile-header"
                   style={{
                     padding: '1.15rem 1.25rem',
                     display: 'flex',
@@ -501,7 +503,7 @@ export default function Services({ onOpenProjectModal, onSelectPackage }) {
                     </span>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-                        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'var(--forest)', margin: 0, fontWeight: '700' }}>
+                        <h3 className="service-mobile-title" style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', color: 'var(--forest)', margin: 0, fontWeight: '700' }}>
                           {service.title}
                         </h3>
                         {(isPremium || isEcommerce) && (
@@ -555,12 +557,12 @@ export default function Services({ onOpenProjectModal, onSelectPackage }) {
 
                 {/* Mobile Accordion Expanded Body */}
                 {isExpanded && (
-                  <div style={{ padding: '1.25rem 1.25rem 1.4rem 1.25rem', borderTop: '1px solid var(--border-subtle)', backgroundColor: 'var(--bg-primary)' }}>
+                  <div className="service-mobile-body" style={{ padding: '1.25rem 1.25rem 1.4rem 1.25rem', borderTop: '1px solid var(--border-subtle)', backgroundColor: 'var(--bg-primary)' }}>
                     <p style={{ fontSize: '0.9rem', color: 'var(--charcoal-light)', lineHeight: '1.55', marginBottom: '1.1rem' }}>
                       {service.shortDescription}
                     </p>
 
-                    <div style={{ marginBottom: '1.25rem', backgroundColor: 'var(--bg-secondary)', padding: '1rem', borderRadius: 'var(--radius-sm)' }}>
+                    <div className="service-mobile-highlights" style={{ marginBottom: '1.25rem', backgroundColor: 'var(--bg-secondary)', padding: '1rem', borderRadius: 'var(--radius-sm)' }}>
                       <span style={{ fontSize: '0.72rem', fontWeight: '700', color: 'var(--forest)', textTransform: 'uppercase', letterSpacing: '0.06em', display: 'block', marginBottom: '0.6rem' }}>
                         KEY HIGHLIGHTS:
                       </span>
@@ -609,7 +611,7 @@ export default function Services({ onOpenProjectModal, onSelectPackage }) {
         {/* Moving Text Marquee Strip #2 (Right-to-Left Opposing Motion) */}
         <ScrollReveal delay={0.2}>
           <div
-            className="services-marquee-wrapper"
+            className="services-marquee-wrapper services-marquee-bottom"
             style={{
               overflow: 'hidden',
               whiteSpace: 'nowrap',
@@ -708,6 +710,57 @@ export default function Services({ onOpenProjectModal, onSelectPackage }) {
             width: 100% !important;
             max-width: 100% !important;
             box-sizing: border-box !important;
+          }
+          .services-marquee-top {
+            margin: 0 0 1.25rem 0 !important;
+            padding: 0.5rem 0 !important;
+          }
+          .services-marquee-bottom {
+            margin: 1.5rem 0 0 0 !important;
+            padding: 0.5rem 0 !important;
+          }
+          .services-marquee-track,
+          .services-marquee-track-reverse {
+            gap: 1.5rem !important;
+          }
+          .services-marquee-track span,
+          .services-marquee-track-reverse span {
+            font-size: 0.68rem !important;
+          }
+          .service-mobile-card {
+            margin-bottom: 0.75rem !important;
+          }
+          .service-mobile-header {
+            padding: 0.8rem 0.95rem !important;
+          }
+          .service-mobile-title {
+            font-size: 1.05rem !important;
+          }
+          .service-mobile-body {
+            padding: 0.8rem 0.95rem 0.95rem 0.95rem !important;
+          }
+          .service-mobile-body p {
+            font-size: 0.82rem !important;
+            margin-bottom: 0.75rem !important;
+            line-height: 1.5 !important;
+          }
+          .service-mobile-highlights {
+            padding: 0.65rem 0.8rem !important;
+            margin-bottom: 0.85rem !important;
+          }
+          .service-mobile-highlights span {
+            font-size: 0.68rem !important;
+            margin-bottom: 0.45rem !important;
+          }
+          .service-mobile-highlights li {
+            font-size: 0.78rem !important;
+            gap: 0.45rem !important;
+          }
+          .service-mobile-body .btn-primary,
+          .service-mobile-body .btn-secondary {
+            min-height: 38px !important;
+            padding: 0.5rem 0.4rem !important;
+            font-size: 0.78rem !important;
           }
         }
 
