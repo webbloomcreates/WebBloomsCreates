@@ -64,12 +64,12 @@ export default function ServiceDetailModal({ service, onClose, onSelectService }
         {/* Header */}
         <div
           style={{
-            padding: '1.75rem 2rem 1.25rem 2rem',
+            padding: 'clamp(1.2rem, 3.5vw, 1.75rem) clamp(1rem, 3.5vw, 2rem) clamp(1rem, 3vw, 1.25rem) clamp(1rem, 3.5vw, 2rem)',
             borderBottom: '1px solid var(--border-subtle)',
             display: 'flex',
             alignItems: 'flex-start',
             justifyContent: 'space-between',
-            gap: '1rem',
+            gap: '0.75rem',
             backgroundColor: 'var(--bg-secondary)'
           }}
         >
@@ -166,7 +166,7 @@ export default function ServiceDetailModal({ service, onClose, onSelectService }
         {/* Scrollable Modal Content */}
         <div
           style={{
-            padding: '1.75rem 2rem',
+            padding: 'clamp(1.2rem, 3.5vw, 1.75rem) clamp(1rem, 3.5vw, 2rem)',
             overflowY: 'auto',
             flexGrow: 1,
             display: 'flex',
@@ -230,7 +230,7 @@ export default function ServiceDetailModal({ service, onClose, onSelectService }
 
           {/* SPLIT SECTIONS (For Premium & E-Commerce) */}
           {service.splitSections ? (
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.25rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.25rem' }}>
               {/* CUSTOMER SECTION */}
               <div
                 style={{
@@ -376,20 +376,20 @@ export default function ServiceDetailModal({ service, onClose, onSelectService }
         {/* Footer Actions */}
         <div
           style={{
-            padding: '1.25rem 2rem',
+            padding: '1rem clamp(1rem, 3.5vw, 2rem)',
             borderTop: '1px solid var(--border-subtle)',
             backgroundColor: 'var(--bg-secondary)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '1rem',
+            gap: '0.75rem',
             flexWrap: 'wrap'
           }}
         >
           <button
             onClick={onClose}
             className="btn-secondary"
-            style={{ padding: '0.8rem 1.4rem', fontSize: '0.9rem' }}
+            style={{ padding: '0.75rem 1.25rem', fontSize: '0.88rem', flex: '1 1 auto', justifyContent: 'center' }}
           >
             Close
           </button>
@@ -397,7 +397,7 @@ export default function ServiceDetailModal({ service, onClose, onSelectService }
           <button
             onClick={handleCta}
             className="btn-primary"
-            style={{ padding: '0.85rem 1.8rem', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+            style={{ padding: '0.75rem 1.5rem', fontSize: '0.88rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', flex: '1 1 auto' }}
           >
             <span>Start your website</span>
             <ArrowRight size={15} />

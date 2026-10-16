@@ -312,7 +312,7 @@ export default function Portfolio({ onOpenProjectModal }) {
                         {project.tagline}
                       </p>
 
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--border-subtle)', paddingTop: '0.85rem', gap: '0.5rem' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--border-subtle)', paddingTop: '0.85rem', gap: '0.5rem', flexWrap: 'wrap' }}>
                         {project.liveUrl ? (
                           <a
                             href={project.liveUrl}
@@ -486,7 +486,7 @@ export default function Portfolio({ onOpenProjectModal }) {
             box-sizing: border-box !important;
           }
           .portfolio-hover-card {
-            width: calc(100vw - 2.5rem) !important;
+            width: clamp(260px, 82vw, 320px) !important;
             max-width: 320px !important;
             box-sizing: border-box !important;
           }

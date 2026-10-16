@@ -94,7 +94,9 @@ export default function LogoIntroLoader({ onComplete }) {
 
         {/* Brand Title */}
         <div style={{ textAlign: 'center' }}>
-          <h1
+          <div
+            role="heading"
+            aria-level="2"
             style={{
               fontFamily: 'var(--font-sans)',
               fontSize: '1.85rem',
@@ -106,7 +108,7 @@ export default function LogoIntroLoader({ onComplete }) {
             }}
           >
             Web.Bloom<span style={{ color: 'var(--sage)' }}>Creates</span>
-          </h1>
+          </div>
           <span
             style={{
               fontSize: '0.78rem',

@@ -3,7 +3,7 @@ export const studioInfo = {
   tagline: "Websites • Design • Growth",
   shortDescription: "We design and build modern websites for businesses, brands and individuals.",
   handle: "@web.bloomcreates",
-  instagramUrl: "https://instagram.com/web.bloomcreates",
+  instagramUrl: "https://www.instagram.com/web.bloomcreates/",
   email: "webbloom.creates@gmail.com", // Official Studio Email
   whatsapp: "+91 90596 81030", // WhatsApp Contact
   location: "India / Worldwide Remote",

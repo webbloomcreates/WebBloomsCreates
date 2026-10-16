@@ -32,10 +32,23 @@ export default function Navbar({ onOpenProjectModal }) {
     { label: 'FAQ', href: '#faq' }
   ];
 
+  const mobileNavLinks = [
+    { label: 'Home', href: '#home' },
+    { label: 'Our Work', href: '#work' },
+    { label: 'Services', href: '#services' },
+    { label: 'Process', href: '#process' },
+    { label: 'FAQ', href: '#faq' },
+    { label: 'Start a Project', href: '#project' }
+  ];
+
   const handleNavClick = (href) => {
     setMobileMenuOpen(false);
     if (href === '#home' || href === '#') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    if (href === '#project' || href === '#contact') {
+      handleStartProjectClick();
       return;
     }
     const id = href.replace('#', '');
@@ -250,17 +263,18 @@ export default function Navbar({ onOpenProjectModal }) {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          padding: '2rem 1.75rem 2.5rem 1.75rem',
+          padding: '1.75rem clamp(1rem, 4vw, 1.75rem) 2rem clamp(1rem, 4vw, 1.75rem)',
           boxShadow: '-10px 0 30px rgba(0, 0, 0, 0.15)',
           transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(100%)',
           transition: 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
-          overflowY: 'auto'
+          overflowY: 'auto',
+          boxSizing: 'border-box'
         }}
       >
         <div>
           {/* Drawer Top Header with Brand & Close Button */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2.5rem' }}>
-            <span className="badge-tag" style={{ fontSize: '0.75rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem', gap: '0.5rem' }}>
+            <span className="badge-tag" style={{ fontSize: '0.72rem', padding: '0.35rem 0.75rem' }}>
               <Sparkles size={12} /> Web.BloomCreates
             </span>
             <button
@@ -276,7 +290,8 @@ export default function Navbar({ onOpenProjectModal }) {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                flexShrink: 0
               }}
             >
               <X size={20} />
@@ -284,8 +299,8 @@ export default function Navbar({ onOpenProjectModal }) {
           </div>
 
           {/* Navigation Links Stream */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-            {navLinks.map((link) => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            {mobileNavLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
@@ -295,19 +310,19 @@ export default function Navbar({ onOpenProjectModal }) {
                 }}
                 style={{
                   fontFamily: 'var(--font-serif)',
-                  fontSize: '1.8rem',
+                  fontSize: 'clamp(1.4rem, 4.5vw, 1.75rem)',
                   fontWeight: '600',
                   color: 'var(--forest)',
                   textDecoration: 'none',
                   borderBottom: '1px solid var(--border-subtle)',
-                  paddingBottom: '0.75rem',
+                  paddingBottom: '0.65rem',
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center'
                 }}
               >
                 {link.label}
-                <ArrowUpRight size={20} style={{ color: 'var(--sage)' }} />
+                <ArrowUpRight size={18} style={{ color: 'var(--sage)' }} />
               </a>
             ))}
           </div>

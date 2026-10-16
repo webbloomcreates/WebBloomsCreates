@@ -66,11 +66,11 @@ export default function FAQ({ onOpenProjectModal }) {
                     aria-expanded={isOpen}
                     style={{
                       width: '100%',
-                      padding: '1.4rem 1.75rem',
+                      padding: 'clamp(1rem, 3.2vw, 1.4rem) clamp(0.95rem, 3.2vw, 1.75rem)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      gap: '1rem',
+                      gap: '0.75rem',
                       backgroundColor: 'transparent',
                       border: 'none',
                       textAlign: 'left',
@@ -82,7 +82,7 @@ export default function FAQ({ onOpenProjectModal }) {
                     <span
                       style={{
                         fontFamily: 'var(--font-serif)',
-                        fontSize: '1.3rem',
+                        fontSize: 'clamp(1.08rem, 2.8vw, 1.3rem)',
                         fontWeight: '600',
                         lineHeight: '1.3',
                         color: isOpen ? 'var(--forest)' : 'var(--charcoal)'
@@ -112,7 +112,7 @@ export default function FAQ({ onOpenProjectModal }) {
 
                   <div
                     style={{
-                      maxHeight: isOpen ? '400px' : '0px',
+                      maxHeight: isOpen ? '500px' : '0px',
                       opacity: isOpen ? 1 : 0,
                       overflow: 'hidden',
                       transition: 'max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, padding 0.35s ease'
@@ -120,14 +120,14 @@ export default function FAQ({ onOpenProjectModal }) {
                   >
                     <div
                       style={{
-                        padding: '0 1.75rem 1.6rem 1.75rem',
+                        padding: '0 clamp(0.95rem, 3.2vw, 1.75rem) clamp(1.1rem, 3.2vw, 1.6rem) clamp(0.95rem, 3.2vw, 1.75rem)',
                         borderTop: '1px solid var(--border-subtle)',
                         color: 'var(--charcoal-light)',
-                        fontSize: '1rem',
-                        lineHeight: '1.7'
+                        fontSize: 'clamp(0.92rem, 2.2vw, 1rem)',
+                        lineHeight: '1.65'
                       }}
                     >
-                      <p style={{ marginTop: '1rem' }}>{item.answer}</p>
+                      <p style={{ marginTop: '0.85rem' }}>{item.answer}</p>
                     </div>
                   </div>
                 </div>

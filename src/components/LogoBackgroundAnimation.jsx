@@ -18,8 +18,9 @@ export default function LogoBackgroundAnimation() {
       style={{
         position: 'fixed',
         inset: 0,
-        width: '100vw',
-        maxWidth: '100vw',
+        width: '100%',
+        maxWidth: '100%',
+        boxSizing: 'border-box',
         pointerEvents: 'none',
         overflow: 'hidden',
         zIndex: 0

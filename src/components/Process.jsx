@@ -195,28 +195,29 @@ export default function Process() {
         <div className="mobile-timeline-wrapper" style={{ display: 'none', position: 'relative' }}>
           {/* Vertical Connecting Line */}
           <div
+            className="mobile-timeline-line"
             style={{
               position: 'absolute',
               top: '20px',
               bottom: '20px',
-              left: '23px',
+              left: '21px',
               width: '2px',
               backgroundColor: 'var(--sage)',
               zIndex: 0
             }}
           />
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', position: 'relative', zIndex: 1 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.75rem', position: 'relative', zIndex: 1 }}>
             {processSteps.map((stepItem, idx) => {
               const IconComp = iconMap[stepItem.icon] || Compass;
               return (
                 <ScrollReveal key={stepItem.step} delay={idx * 0.1}>
-                  <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'flex-start' }}>
+                  <div style={{ display: 'flex', gap: 'clamp(0.75rem, 3vw, 1.25rem)', alignItems: 'flex-start' }}>
                     {/* Vertical Node Circle */}
                     <div
                       style={{
-                        width: '48px',
-                        height: '48px',
+                        width: '42px',
+                        height: '42px',
                         borderRadius: '50%',
                         backgroundColor: 'var(--forest)',
                         color: '#ffffff',
@@ -228,7 +229,7 @@ export default function Process() {
                         boxShadow: 'var(--shadow-sm)'
                       }}
                     >
-                      <IconComp size={20} />
+                      <IconComp size={18} />
                     </div>
 
                     {/* Mobile Card Content */}
@@ -237,13 +238,14 @@ export default function Process() {
                         backgroundColor: 'var(--bg-secondary)',
                         borderRadius: 'var(--radius-md)',
                         border: '1px solid var(--border-medium)',
-                        padding: '1.5rem',
+                        padding: 'clamp(1rem, 3.5vw, 1.5rem)',
                         flexGrow: 1,
+                        minWidth: 0,
                         boxShadow: 'var(--shadow-sm)'
                       }}
                     >
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                        <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--sage)' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.4rem' }}>
+                        <span style={{ fontSize: '0.72rem', fontWeight: '700', color: 'var(--sage)' }}>
                           STEP {stepItem.step}
                         </span>
                       </div>

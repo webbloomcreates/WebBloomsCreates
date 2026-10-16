@@ -271,7 +271,7 @@ export default function Hero({ onOpenProjectModal }) {
               className="hero-laptop-frame"
               style={{
                 position: 'relative',
-                width: '94%',
+                width: '82%',
                 marginLeft: '0',
                 animation: 'laptopFloat 6s ease-in-out infinite'
               }}
@@ -280,15 +280,15 @@ export default function Hero({ onOpenProjectModal }) {
               <div
                 style={{
                   backgroundColor: '#1E2421',
-                  borderRadius: '16px 16px 4px 4px',
-                  padding: '10px 10px 0 10px',
-                  boxShadow: '0 25px 60px -15px rgba(23, 51, 34, 0.25)',
+                  borderRadius: '14px 14px 4px 4px',
+                  padding: '8px 8px 0 8px',
+                  boxShadow: '0 20px 50px -15px rgba(23, 51, 34, 0.25)',
                   border: '1px solid #2D3732'
                 }}
               >
                 {/* Webcam Dot & Mic */}
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
-                  <div style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#000000', border: '1px solid #333' }} />
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '5px', marginBottom: '6px' }}>
+                  <div style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#000000', border: '1px solid #333' }} />
                   <div style={{ width: '3px', height: '3px', borderRadius: '50%', backgroundColor: '#0E3A20' }} />
                 </div>
 
@@ -296,7 +296,7 @@ export default function Hero({ onOpenProjectModal }) {
                 <div
                   style={{
                     backgroundColor: 'var(--bg-secondary)',
-                    borderRadius: '8px 8px 0 0',
+                    borderRadius: '6px 6px 0 0',
                     overflow: 'hidden',
                     border: '1px solid var(--border-medium)'
                   }}
@@ -305,38 +305,38 @@ export default function Hero({ onOpenProjectModal }) {
                   <div
                     style={{
                       backgroundColor: 'var(--bg-card)',
-                      padding: '0.6rem 1rem',
+                      padding: '0.45rem 0.75rem',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
                       borderBottom: '1px solid var(--border-subtle)'
                     }}
                   >
-                    <div style={{ display: 'flex', gap: '0.4rem' }}>
-                      <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: '#E06C75' }} />
-                      <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: '#E5C07B' }} />
-                      <div style={{ width: '9px', height: '9px', borderRadius: '50%', backgroundColor: '#98C379' }} />
+                    <div style={{ display: 'flex', gap: '0.35rem' }}>
+                      <div style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#E06C75' }} />
+                      <div style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#E5C07B' }} />
+                      <div style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#98C379' }} />
                     </div>
 
                     <div
                       style={{
                         backgroundColor: 'var(--bg-secondary)',
-                        padding: '0.2rem 0.85rem',
+                        padding: '0.15rem 0.65rem',
                         borderRadius: 'var(--radius-pill)',
-                        fontSize: '0.72rem',
+                        fontSize: '0.64rem',
                         color: 'var(--charcoal-muted)',
                         fontFamily: 'monospace',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '0.4rem',
+                        gap: '0.35rem',
                         border: '1px solid var(--border-subtle)'
                       }}
                     >
-                      <ShieldCheck size={12} style={{ color: 'var(--sage)' }} />
+                      <ShieldCheck size={10} style={{ color: 'var(--sage)' }} />
                       webbloomcreates.github.io/Cafe-demo/
                     </div>
 
-                    <div style={{ fontSize: '0.65rem', color: 'var(--sage)', fontWeight: '700', letterSpacing: '0.05em' }}>
+                    <div style={{ fontSize: '0.58rem', color: 'var(--sage)', fontWeight: '700', letterSpacing: '0.05em' }}>
                       WEB.BLOOMCREATES
                     </div>
                   </div>
@@ -344,9 +344,9 @@ export default function Hero({ onOpenProjectModal }) {
                   {/* Laptop Live Website Display Canvas */}
                   <div
                     style={{
-                      padding: '1.25rem 1.25rem',
+                      padding: '0.85rem 1rem',
                       background: 'linear-gradient(180deg, #FBF8F3 0%, #FFFDF9 100%)',
-                      minHeight: '220px',
+                      minHeight: '175px',
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'space-between',
@@ -513,9 +513,9 @@ export default function Hero({ onOpenProjectModal }) {
             <div
               style={{
                 position: 'absolute',
-                bottom: '-12px',
+                bottom: '-10px',
                 right: '0',
-                width: '150px',
+                width: '130px',
                 zIndex: 25,
                 animation: 'mobileFloat 5.5s ease-in-out infinite 0.8s'
               }}
@@ -524,98 +524,98 @@ export default function Hero({ onOpenProjectModal }) {
               <div
                 style={{
                   backgroundColor: '#121714',
-                  borderRadius: '28px',
-                  padding: '8px',
+                  borderRadius: '24px',
+                  padding: '6px',
                   border: '2px solid #2A362F',
-                  boxShadow: '0 20px 45px rgba(0, 0, 0, 0.35)'
+                  boxShadow: '0 16px 36px rgba(0, 0, 0, 0.35)'
                 }}
               >
                 {/* Dynamic Island Notch */}
                 <div
                   style={{
                     backgroundColor: '#000000',
-                    width: '60px',
-                    height: '14px',
-                    borderRadius: '10px',
-                    margin: '2px auto 8px auto',
+                    width: '40px',
+                    height: '10px',
+                    borderRadius: '8px',
+                    margin: '1px auto 6px auto',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: '4px'
+                    gap: '3px'
                   }}
                 >
-                  <div style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#1A1A1A' }} />
-                  <div style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#052914' }} />
+                  <div style={{ width: '4px', height: '4px', borderRadius: '50%', backgroundColor: '#1A1A1A' }} />
+                  <div style={{ width: '3px', height: '3px', borderRadius: '50%', backgroundColor: '#052914' }} />
                 </div>
 
                 {/* Mobile Screen Display */}
                 <div
                   style={{
                     backgroundColor: '#FAF7F2',
-                    borderRadius: '20px',
+                    borderRadius: '16px',
                     overflow: 'hidden',
-                    minHeight: '200px',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    padding: '0.85rem 0.75rem',
+                    padding: '0.65rem 0.55rem',
                     border: '1px solid var(--border-subtle)'
                   }}
                 >
-                  {/* Mobile Header */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.65rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <Leaf size={13} style={{ color: 'var(--forest)' }} />
-                      <span style={{ fontFamily: 'var(--font-serif)', fontWeight: '700', fontSize: '0.78rem', color: 'var(--forest)' }}>
-                        MAISON
+                  {/* Mini Header */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.45rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '3px' }}>
+                      <Leaf size={10} style={{ color: 'var(--forest)' }} />
+                      <span style={{ fontFamily: 'var(--font-serif)', fontWeight: '700', fontSize: '0.62rem', color: 'var(--forest)' }}>
+                        Bloom
                       </span>
                     </div>
-                    <div style={{ backgroundColor: 'var(--forest)', color: '#fff', fontSize: '0.6rem', padding: '2px 8px', borderRadius: 'var(--radius-pill)', fontWeight: '600' }}>
-                      Menu ☰
+                    <div style={{ backgroundColor: 'var(--sage-muted)', color: 'var(--forest)', fontSize: '0.5rem', padding: '1px 6px', borderRadius: 'var(--radius-pill)', fontWeight: '700' }}>
+                      ⚡ 0.4s
                     </div>
                   </div>
 
-                  {/* Mobile Body Content */}
+                  {/* Cute Mini Card */}
                   <div
                     style={{
                       backgroundColor: '#ffffff',
-                      borderRadius: '12px',
-                      padding: '0.75rem',
+                      borderRadius: '10px',
+                      padding: '0.45rem 0.35rem',
                       border: '1px solid var(--border-subtle)',
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.03)',
-                      marginBottom: '0.65rem'
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                      marginBottom: '0.45rem',
+                      textAlign: 'center'
                     }}
                   >
-                    <span style={{ fontSize: '0.58rem', color: 'var(--sage)', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                      MOBILE OPTIMIZED
-                    </span>
-                    <h4 style={{ fontFamily: 'var(--font-serif)', fontSize: '0.98rem', color: 'var(--forest)', lineHeight: '1.2', margin: '0.2rem 0' }}>
-                      Artisanal Coffee Atelier
-                    </h4>
-                    <p style={{ fontSize: '0.68rem', color: 'var(--charcoal-light)', lineHeight: '1.3' }}>
-                      Designed specifically for seamless Instagram mobile traffic.
-                    </p>
+                    <div style={{ width: '24px', height: '24px', borderRadius: '50%', backgroundColor: 'var(--sage-muted)', margin: '0 auto 0.25rem auto', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.72rem' }}>
+                      ✨
+                    </div>
+                    <div style={{ fontFamily: 'var(--font-serif)', fontSize: '0.66rem', fontWeight: '700', color: 'var(--forest)', lineHeight: '1.2' }}>
+                      Mobile First
+                    </div>
+                    <div style={{ fontSize: '0.52rem', color: 'var(--sage)', fontWeight: '600', marginTop: '2px' }}>
+                      100% Responsive
+                    </div>
                   </div>
 
-                  {/* Mobile Action Button */}
+                  {/* Cute Action Button */}
                   <button
                     style={{
                       width: '100%',
                       backgroundColor: 'var(--forest)',
                       color: '#ffffff',
                       border: 'none',
-                      padding: '0.5rem',
+                      padding: '0.35rem 0.4rem',
                       borderRadius: 'var(--radius-pill)',
-                      fontSize: '0.7rem',
+                      fontSize: '0.55rem',
                       fontWeight: '600',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      gap: '4px',
-                      boxShadow: '0 4px 10px rgba(23, 51, 34, 0.2)'
+                      gap: '3px',
+                      boxShadow: '0 3px 8px rgba(23, 51, 34, 0.2)'
                     }}
                   >
-                    <Smartphone size={11} /> Order via Instagram →
+                    <Smartphone size={9} /> Explore →
                   </button>
                 </div>
               </div>
@@ -701,27 +701,37 @@ export default function Hero({ onOpenProjectModal }) {
         }
 
         @media (max-width: 768px) {
+          .hero-grid {
+            gap: 2rem !important;
+          }
           .hero-center-bg-watermark {
-            width: clamp(220px, 70vw, 320px) !important;
-            height: clamp(220px, 70vw, 320px) !important;
-            opacity: 0.08 !important;
+            width: clamp(200px, 65vw, 300px) !important;
+            height: clamp(200px, 65vw, 300px) !important;
+            opacity: 0.07 !important;
           }
           .hero-pill-top, .hero-pill-right {
             display: none !important;
+          }
+          .hero-visual-col {
+            width: 88% !important;
+            max-width: 88% !important;
+            box-sizing: border-box !important;
+            margin: 0.75rem auto 0 auto !important;
+            padding-bottom: 1.5rem !important;
           }
           .hero-laptop-frame {
             width: 100% !important;
             max-width: 100% !important;
           }
           .hero-mobile-frame {
-            width: 130px !important;
-            bottom: -15px !important;
+            width: 95px !important;
+            bottom: -8px !important;
             right: 0px !important;
           }
           .hero-cta-group {
             flex-direction: column !important;
             align-items: stretch !important;
-            gap: 0.85rem !important;
+            gap: 0.75rem !important;
             width: 100% !important;
           }
           .hero-cta-group button, .hero-cta-group a {
@@ -733,8 +743,29 @@ export default function Hero({ onOpenProjectModal }) {
           .hero-features-list {
             flex-direction: column !important;
             align-items: flex-start !important;
-            gap: 0.75rem !important;
+            gap: 0.65rem !important;
             width: 100% !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .animate-hero-2 {
+            font-size: clamp(1.7rem, 6.2vw, 2.2rem) !important;
+            line-height: 1.15 !important;
+          }
+          .animate-hero-3 {
+            font-size: 0.92rem !important;
+            line-height: 1.55 !important;
+          }
+          .hero-visual-col {
+            width: 82% !important;
+            max-width: 82% !important;
+            margin: 0.5rem auto 0 auto !important;
+          }
+          .hero-mobile-frame {
+            width: 80px !important;
+            bottom: -6px !important;
+            right: 0px !important;
           }
         }
       `}</style>

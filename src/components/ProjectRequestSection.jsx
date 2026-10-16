@@ -285,10 +285,11 @@ export default function ProjectRequestSection({ preselectedPackage }) {
 
         {/* Desktop Two-Column Layout / Mobile Stacked Layout */}
         <div
+          className="project-request-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: 'clamp(2.5rem, 5vw, 4.5rem)',
+            gap: 'clamp(2rem, 5vw, 4.5rem)',
             alignItems: 'start'
           }}
         >
@@ -507,13 +508,15 @@ export default function ProjectRequestSection({ preselectedPackage }) {
           {/* RIGHT SIDE: The Project Inquiry Form Card */}
           <ScrollReveal delay={0.2}>
             <div
+              className="project-form-card"
               style={{
                 backgroundColor: 'var(--bg-secondary)',
                 borderRadius: 'var(--radius-lg)',
                 border: '1px solid var(--border-medium)',
-                padding: 'clamp(1.75rem, 4vw, 3rem)',
+                padding: 'clamp(1.25rem, 3.5vw, 3rem)',
                 boxShadow: 'var(--shadow-md)',
-                position: 'relative'
+                position: 'relative',
+                boxSizing: 'border-box'
               }}
             >
               {isSubmitted ? (
@@ -603,7 +606,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
 
                   {/* Action Controls for Preferred Contact */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '0.65rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '0.65rem' }}>
                       <a
                         href={studioInfo.instagramUrl}
                         target="_blank"
@@ -992,7 +995,7 @@ export default function ProjectRequestSection({ preselectedPackage }) {
                     <label style={{ display: 'block', fontSize: '0.88rem', fontWeight: '700', color: 'var(--forest)', marginBottom: '0.5rem' }}>
                       9. BUDGET <span style={{ fontWeight: '400', color: 'var(--charcoal-muted)' }}>(Optional)</span>
                     </label>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '0.5rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '0.5rem' }}>
                       {budgetOptions.map((b) => {
                         const isSelected = formData.budget === b;
                         return (
@@ -1078,6 +1081,14 @@ export default function ProjectRequestSection({ preselectedPackage }) {
           </ScrollReveal>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 860px) {
+          .project-request-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

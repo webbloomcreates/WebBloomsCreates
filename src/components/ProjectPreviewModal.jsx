@@ -23,11 +23,12 @@ export default function ProjectPreviewModal({ project, onClose, onOpenProjectMod
         {/* Modal Header */}
         <div
           style={{
-            padding: '1.5rem 2rem',
+            padding: 'clamp(1rem, 3.5vw, 1.5rem) clamp(1rem, 3.5vw, 2rem)',
             borderBottom: '1px solid var(--border-subtle)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            gap: '0.75rem',
             backgroundColor: 'var(--bg-primary)'
           }}
         >
@@ -35,7 +36,7 @@ export default function ProjectPreviewModal({ project, onClose, onOpenProjectMod
             <span className="badge-tag" style={{ marginBottom: '0.4rem', fontSize: '0.78rem' }}>
               {project.category} • {project.year}
             </span>
-            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', color: 'var(--forest)' }}>
+            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.4rem, 4vw, 1.75rem)', color: 'var(--forest)' }}>
               {project.name || project.title}
             </h3>
           </div>
@@ -52,7 +53,8 @@ export default function ProjectPreviewModal({ project, onClose, onOpenProjectMod
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              flexShrink: 0
             }}
           >
             <X size={18} />
@@ -60,7 +62,7 @@ export default function ProjectPreviewModal({ project, onClose, onOpenProjectMod
         </div>
 
         {/* Modal Body */}
-        <div style={{ padding: '2rem' }}>
+        <div style={{ padding: 'clamp(1rem, 3.5vw, 2rem)' }}>
           {/* Visual Showcase Banner */}
           {project.image ? (
             <div
